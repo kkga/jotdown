@@ -18,8 +18,8 @@ body {
   grid-template-areas:
     "toolbar"
     "pad";
-  gap: 0.5rem;
-  padding: 0.5rem;
+  /* gap: 0.5rem; */
+  /* padding: 0.5rem; */
   margin: 0;
   width: 100vw;
   height: 100vh;

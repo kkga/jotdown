@@ -43,6 +43,7 @@
     </ul>
   {:else}
     <Sheet
+      centeredHead
       sheet={sheets[currentSheet - 1]}
       on:update={(e) => updateSheet(e.detail)}
     />
@@ -58,7 +59,7 @@
   .pad-list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1ch;
+    grid-gap: 2px;
     list-style: none;
     margin: 0;
     padding: 0;

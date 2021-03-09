@@ -10,6 +10,7 @@
   /*   node && typeof node.focus === "function" && node.focus(); */
 
   export let sheet: SheetType;
+  export let centeredHead = false;
 
   let nameEl: HTMLElement;
   let textEl: HTMLElement;
@@ -27,7 +28,12 @@
 </script>
 
 <div class="sheet" style="background-color: {elColors["body"]}">
-  <label bind:this={nameEl} for="sheet-{sheet.id}" style="background-color: {elColors["head"]}" class="sheet-label"
+  <label 
+    bind:this={nameEl}
+                   contenteditable
+    for="sheet-{sheet.id}" 
+    style="background-color: {elColors["head"]}; text-align: {centeredHead ? `center`: `left`}"
+    class="sheet-label"
     >{sheet.id}</label
   >
   <textarea
@@ -44,7 +50,6 @@
     flex: 1;
     display: flex;
     flex-flow: column nowrap;
-    box-shadow: inset 0 0 0 1px #00000033;
   }
   .sheet-label {
     display: block;

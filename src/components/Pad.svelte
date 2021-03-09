@@ -5,34 +5,29 @@
 
   export let sheets: SheetType[] = [];
 
-  let layout = "grid";
-  let currentSheet: number = 1;
+  let currentSheet = 1;
+  let isFullscreen = false;
 
-  $: console.log(layout, currentSheet);
+  $: console.log(isFullscreen);
 
   function updateSheet(sheet: SheetType) {
     const i = sheets.findIndex((s) => s.id === sheet.id);
     sheets[i] = { ...sheets[i], ...sheet };
   }
 
-  function changeLayout(selected_layout: string) {
-    console.log(layout);
-    layout = selected_layout;
-  }
-
-  function changeSheet(new_sheet_id: number) {
-    currentSheet = new_sheet_id;
-  }
+  /* function changeSheet(new_sheet_id: number) { */
+  /*   currentSheet = new_sheet_id; */
+  /* } */
 </script>
 
 <Toolbar
-         {sheets}
-  on:layoutChange={(e) => changeLayout(e.detail)}
-  on:sheetChanged={(e) => changeSheet(e.detail)}
+  {sheets}
+  bind:currentSheet
+  bind:fullscreen={isFullscreen}
 />
 
 <div class="pad">
-  {#if layout === "grid"}
+  {#if !isFullscreen}
     <ul role="list" class="pad-list">
       {#each sheets as sheet (sheet.id)}
         <li class="pad-list-item">
@@ -46,7 +41,7 @@
         <li>Nothing here!</li>
       {/each}
     </ul>
-  {:else if layout === "single"}
+  {:else}
     <Sheet
       sheet={sheets[currentSheet - 1]}
       on:update={(e) => updateSheet(e.detail)}
@@ -57,14 +52,13 @@
 <style>
   .pad {
     grid-area: pad;
-    padding: 1rem;
     display: flex;
     flex-direction: column;
   }
   .pad-list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
+    grid-gap: 1ch;
     list-style: none;
     margin: 0;
     padding: 0;

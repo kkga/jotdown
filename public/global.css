@@ -6,6 +6,10 @@
 
 :root {
   --color-bg: #fff;
+  --color-grey: #777;
+  --color-black: #000;
+  --font-sheet: 'sf mono', monospace;
+  --font-size-sheet: 13px;
 }
 
 body {
@@ -14,11 +18,14 @@ body {
   grid-template-areas:
     "toolbar"
     "pad";
+  gap: 0.5rem;
+  padding: 0.5rem;
   margin: 0;
   width: 100vw;
   height: 100vh;
-  font-family: monospace;
-  line-height: 1.5;
+  font-family: var(--font-sheet);
+  font-size: var(--font-size-sheet);
+  line-height: 1.25;
   background-color: var(--color-bg)
 }
 

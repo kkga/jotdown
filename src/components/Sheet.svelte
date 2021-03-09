@@ -2,6 +2,7 @@
   import { createEventDispatcher } from "svelte";
   /* import { selectOnFocus } from "../actions"; */
   import type { SheetType } from "../types/sheet.type";
+  import { colors } from "../colors"
 
   const dispatch = createEventDispatcher();
 
@@ -13,9 +14,7 @@
   let nameEl: HTMLElement;
   let textEl: HTMLElement;
 
-  $: color = sheet.color;
-
-  /* $: console.log(color) */
+  $: elColors = colors[sheet.color];
 
   function update(updatedSheet: Partial<SheetType>) {
     sheet = { ...sheet, ...updatedSheet };
@@ -27,8 +26,8 @@
   }
 </script>
 
-<div class="sheet" style="background-color: {color}">
-  <label bind:this={nameEl} for="sheet-{sheet.id}" class="sheet-label"
+<div class="sheet" style="background-color: {elColors["body"]}">
+  <label bind:this={nameEl} for="sheet-{sheet.id}" style="background-color: {elColors["head"]}" class="sheet-label"
     >{sheet.id}</label
   >
   <textarea
@@ -45,13 +44,14 @@
     flex: 1;
     display: flex;
     flex-flow: column nowrap;
-    box-shadow: inset 0 0 0 1px #00000022;
+    box-shadow: inset 0 0 0 1px #00000033;
   }
   .sheet-label {
     display: block;
     font-weight: bold;
     padding: 2px 1ch;
     background-color: #00000011;
+    color: white;
   }
   .sheet-text {
     padding: 1ch;
@@ -60,6 +60,9 @@
     background-color: transparent;
     outline: none;
     border: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
   }
   .sheet-text:focus {
     outline: 2px solid dodgerblue;

@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { SheetType } from "../types/sheet.type";
-  import { colors } from "../colors";
 
   export let sheets: SheetType[];
   export let currentSheet: number;
@@ -44,7 +43,7 @@
           value="sheet.id"
           class:selected={currentSheet === sheet.id}
           class="sheets-item"
-          style="color: {colors[sheet.color]['icon']}"
+          style="color: var(--{sheet.color}-500)"
         >
           {#if currentSheet !== sheet.id}
             <svg
@@ -108,16 +107,15 @@
     padding: 0;
     border: 0;
     background-color: transparent;
-    color: var(--color-grey);
+    color: var(--gray-400);
   }
   button:hover {
-    background-color: #eee;
+    background-color: var(--gray-700);
+    color: var(--gray-300);
   }
-  button.active {
-    background-color: #eee;
-    color: var(--color-black);
+  button:active {
+    background-color: var(--gray-800);
   }
-
   .sheets {
     display: flex;
     padding: 0;

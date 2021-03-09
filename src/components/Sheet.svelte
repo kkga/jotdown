@@ -2,7 +2,6 @@
   import { createEventDispatcher } from "svelte";
   /* import { selectOnFocus } from "../actions"; */
   import type { SheetType } from "../types/sheet.type";
-  import { colors } from "../colors"
 
   const dispatch = createEventDispatcher();
 
@@ -14,8 +13,6 @@
 
   let nameEl: HTMLElement;
   let textEl: HTMLElement;
-
-  $: elColors = colors[sheet.color];
 
   function update(updatedSheet: Partial<SheetType>) {
     sheet = { ...sheet, ...updatedSheet };
@@ -32,14 +29,14 @@
   }
 </script>
 
-<div class="sheet" style="background-color: {elColors["body"]}">
+<div class="sheet" style="color: var(--{sheet.color}-900); background-color: var(--{sheet.color}-200">
   <input 
     type="text"
     bind:this={nameEl}
     bind:value={sheet.name}
     on:focus={() => dispatch("focus", sheet.id)}
     on:change={(e) => onEditName(e.currentTarget.value)}
-    style="background-color: {elColors["head"]}"
+    style="background-color: var(--{sheet.color}-500); color: var(--{sheet.color}-000)"
     class="sheet-label"
     class:zoomed
     />
@@ -49,9 +46,10 @@
     on:focus={() => dispatch("focus", sheet.id)}
     on:change={(e) => onEditContent(e.currentTarget.value)}
     tabindex={sheet.id}
+    style="color: var(--{sheet.color}-900)"
     class="sheet-text"
     class:zoomed
-    spellcheck="false"
+    spellcheck=false
     >{sheet.content}</textarea>
 </div>
 
@@ -96,6 +94,7 @@
     font-size: var(--font-size-l);
   }
   .sheet-text:focus {
-    outline: 2px solid dodgerblue;
+    outline: 3px solid currentColor;
+    z-index: 1;
   }
 </style>

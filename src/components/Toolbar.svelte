@@ -43,7 +43,7 @@
           value="sheet.id"
           class:selected={currentSheet === sheet.id}
           class="sheets-item"
-          style="color: var(--{sheet.color}-500)"
+          style="color: var(--{sheet.color}-400)"
         >
           {#if currentSheet !== sheet.id}
             <svg

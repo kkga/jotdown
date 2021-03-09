@@ -46,7 +46,7 @@
     on:focus={() => dispatch("focus", sheet.id)}
     on:change={(e) => onEditContent(e.currentTarget.value)}
     tabindex={sheet.id}
-    style="color: var(--{sheet.color}-900)"
+    style="color: var(--{sheet.color}-900); outline-color: var(--{sheet.color}-000)"
     class="sheet-text"
     class:zoomed
     spellcheck=false
@@ -68,6 +68,8 @@
     font-family: var(--font);
     font-size: var(--font-size-s);
     line-height: var(--lh-l);
+    text-transform: uppercase;
+    max-width: 100%;
     appearance: none;
     outline: none;
   }
@@ -94,7 +96,9 @@
     font-size: var(--font-size-l);
   }
   .sheet-text:focus {
-    outline: 3px solid currentColor;
+    box-shadow: inset 0 0 0 2px #ffffff;
+    /* outline-style: inset; */
+    /* outline-width: 2px; */
     z-index: 1;
   }
 </style>

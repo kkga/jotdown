@@ -9,8 +9,16 @@
 }
 
 body {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  grid-template-areas:
+    "toolbar"
+    "pad";
   margin: 0;
+  width: 100vw;
+  height: 100vh;
   font-family: monospace;
+  line-height: 1.5;
   background-color: var(--color-bg)
 }
 

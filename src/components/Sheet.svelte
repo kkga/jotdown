@@ -10,20 +10,20 @@
 
   export let sheet: SheetType;
 
-  let name = sheet.name;
-  let content = sheet.content;
-  let color = sheet.color;
   let nameEl: HTMLElement;
+  let textEl: HTMLElement;
+
+  $: color = sheet.color;
 
   /* $: console.log(color) */
 
   function update(updatedSheet: Partial<SheetType>) {
     sheet = { ...sheet, ...updatedSheet };
-    dispatch("update", sheet);
   }
 
-  function onEdit() {
-    update({ name: name, content: content });
+  function onEdit(content: string) {
+    update({ content: content });
+    dispatch("update", sheet);
   }
 </script>
 
@@ -31,7 +31,13 @@
   <label bind:this={nameEl} for="sheet-{sheet.id}" class="sheet-label"
     >{sheet.id}</label
   >
-  <textarea id="sheet-{sheet.id}" bind:value={content} on:change={onEdit} class="sheet-text" />
+  <textarea
+    bind:this={textEl}
+    id="sheet-{sheet.id}"
+    on:focus={() => dispatch("focus", sheet.id)}
+    on:change={(e) => onEdit(e.currentTarget.value)}
+    class="sheet-text"
+    >{sheet.content}</textarea>
 </div>
 
 <style>
@@ -51,12 +57,11 @@
     padding: 1ch;
     resize: none;
     flex: 1;
-    background-color:  transparent;
+    background-color: transparent;
     outline: none;
     border: none;
   }
   .sheet-text:focus {
     outline: 2px solid dodgerblue;
   }
-
 </style>

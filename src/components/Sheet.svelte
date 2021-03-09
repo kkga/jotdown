@@ -48,8 +48,10 @@
     id="sheet-{sheet.id}"
     on:focus={() => dispatch("focus", sheet.id)}
     on:change={(e) => onEditContent(e.currentTarget.value)}
+    tabindex={sheet.id}
     class="sheet-text"
     class:zoomed
+    spellcheck="false"
     >{sheet.content}</textarea>
 </div>
 
@@ -62,13 +64,12 @@
   .sheet-label {
     display: block;
     font-weight: bold;
-    padding: 2px 1ch;
+    padding: 0 var(--spacer-s);
     border: none;
-    background-color: #00000011;
     color: white;
     font-family: var(--font);
     font-size: var(--font-size-s);
-    line-height: var(--lh-m);
+    line-height: var(--lh-l);
     appearance: none;
     outline: none;
   }
@@ -76,7 +77,7 @@
     text-align: center;
   }
   .sheet-text {
-    padding: 1ch;
+    padding: var(--spacer-s);
     resize: none;
     flex: 1;
     background-color: transparent;
@@ -88,6 +89,10 @@
     appearance: none;
   }
   .sheet-text.zoomed {
+    width: 100%;
+    max-width: 72ch;
+    margin: 0 auto;
+    padding: var(--spacer-m);
     font-size: var(--font-size-l);
   }
   .sheet-text:focus {

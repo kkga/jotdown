@@ -6,10 +6,18 @@
 
 :root {
   --color-bg: #fff;
-  --color-grey: #777;
-  --color-black: #000;
-  --font-sheet: 'sf mono', monospace;
-  --font-size-sheet: 13px;
+  --color-text-secondary: #777;
+  --color-text-primary: #000;
+  --font-main: sans-serif;
+  --font-size-s: 13px;
+  --font-size-m: 16px;
+  --font-size-l: 18px;
+  --lh-m: 1.25;
+  --spacer-s: 8px;
+  --spacer-m: 16px;
+  --spacer-l: 24px;
+  --spacer-xl: 32px;
+  --spacer-xxl: 40px;
 }
 
 body {
@@ -23,8 +31,8 @@ body {
   margin: 0;
   width: 100vw;
   height: 100vh;
-  font-family: var(--font-sheet);
-  font-size: var(--font-size-sheet);
+  font-family: var(--font-main);
+  font-size: var(--font-size-s);
   line-height: 1.25;
   background-color: var(--color-bg)
 }

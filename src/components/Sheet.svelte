@@ -10,7 +10,7 @@
   /*   node && typeof node.focus === "function" && node.focus(); */
 
   export let sheet: SheetType;
-  export let centeredHead = false;
+  export let zoomed = false;
 
   let nameEl: HTMLElement;
   let textEl: HTMLElement;
@@ -21,27 +21,35 @@
     sheet = { ...sheet, ...updatedSheet };
   }
 
-  function onEdit(content: string) {
+  function onEditContent(content: string) {
     update({ content: content });
+    dispatch("update", sheet);
+  }
+
+  function onEditName(name: string) {
+    update({ name: name });
     dispatch("update", sheet);
   }
 </script>
 
 <div class="sheet" style="background-color: {elColors["body"]}">
-  <label 
+  <input 
+    type="text"
     bind:this={nameEl}
-                   contenteditable
-    for="sheet-{sheet.id}" 
-    style="background-color: {elColors["head"]}; text-align: {centeredHead ? `center`: `left`}"
+    bind:value={sheet.name}
+    on:focus={() => dispatch("focus", sheet.id)}
+    on:change={(e) => onEditName(e.currentTarget.value)}
+    style="background-color: {elColors["head"]}"
     class="sheet-label"
-    >{sheet.id}</label
-  >
+    class:zoomed
+    />
   <textarea
     bind:this={textEl}
     id="sheet-{sheet.id}"
     on:focus={() => dispatch("focus", sheet.id)}
-    on:change={(e) => onEdit(e.currentTarget.value)}
+    on:change={(e) => onEditContent(e.currentTarget.value)}
     class="sheet-text"
+    class:zoomed
     >{sheet.content}</textarea>
 </div>
 
@@ -55,8 +63,17 @@
     display: block;
     font-weight: bold;
     padding: 2px 1ch;
+    border: none;
     background-color: #00000011;
     color: white;
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    line-height: var(--lh-m);
+    appearance: none;
+    outline: none;
+  }
+  .sheet-label.zoomed {
+    text-align: center;
   }
   .sheet-text {
     padding: 1ch;
@@ -65,9 +82,13 @@
     background-color: transparent;
     outline: none;
     border: none;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    line-height: var(--lh-m);
+    appearance: none;
+  }
+  .sheet-text.zoomed {
+    font-size: var(--font-size-l);
   }
   .sheet-text:focus {
     outline: 2px solid dodgerblue;

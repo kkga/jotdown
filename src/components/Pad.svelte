@@ -43,7 +43,7 @@
     </ul>
   {:else}
     <Sheet
-      centeredHead
+      zoomed={isFullscreen}
       sheet={sheets[currentSheet - 1]}
       on:update={(e) => updateSheet(e.detail)}
     />

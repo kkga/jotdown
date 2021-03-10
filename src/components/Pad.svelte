@@ -5,14 +5,34 @@
 
   export let sheets: SheetType[] = []
 
-  let currentSheet = 1
+  $: currentSheet = 1
   let isZoomed = false
 
   function updateSheet(sheet: SheetType) {
     const i = sheets.findIndex((s) => s.id === sheet.id)
     sheets[i] = { ...sheets[i], ...sheet }
   }
+
+  function handleKeydown(e: KeyboardEvent) {
+    console.log(e)
+    if (e.ctrlKey && e.key === 'f') {
+      e.preventDefault()
+      isZoomed = !isZoomed
+    } else if (e.key === 'Tab') {
+      e.preventDefault()
+      let nextSheet: number
+      if (e.shiftKey) {
+        nextSheet = currentSheet === 1 ? sheets.length : currentSheet - 1
+      } else {
+        nextSheet = currentSheet === sheets.length ? 1 : currentSheet + 1
+      }
+      currentSheet = nextSheet
+      console.log(currentSheet)
+    }
+  }
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <Toolbar {sheets} bind:currentSheet bind:fullscreen={isZoomed} />
 
@@ -23,6 +43,7 @@
         <li class="pad-list-item">
           <Sheet
             {sheet}
+            isCurrent={currentSheet === sheet.id}
             on:focus={(e) => (currentSheet = e.detail)}
             on:update={(e) => updateSheet(e.detail)} />
         </li>

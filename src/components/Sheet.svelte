@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
-  /* import { selectOnFocus } from "../actions"; */
+  import { onMount, tick, createEventDispatcher } from 'svelte'
   import type { SheetType } from '../types/sheet.type'
 
   const dispatch = createEventDispatcher()
 
-  /* const focusOnInit = (node: HTMLElement) => */
-  /*   node && typeof node.focus === "function" && node.focus(); */
+  const focusOnInit = (node: HTMLElement) =>
+    node && typeof node.focus === 'function' && node.focus()
 
   export let sheet: SheetType
   export let zoomed = false
+  export let isCurrent = false
 
   let nameEl: HTMLElement
   let textEl: HTMLElement
@@ -27,6 +27,19 @@
     update({ name: name })
     dispatch('update', sheet)
   }
+
+  async function focusTextArea() {
+    await tick()
+    textEl.focus()
+  }
+
+  $: if (isCurrent) {
+    focusTextArea()
+  }
+
+  onMount(() => {
+    isCurrent ? textEl.focus() : {}
+  })
 </script>
 
 <div
@@ -40,15 +53,16 @@
       bind:this={nameEl}
       bind:value={sheet.name}
       on:focus={() => dispatch('focus', sheet.id)}
-      on:change={(e) => onEditName(e.currentTarget.value)}
+      on:input={(e) => onEditName(e.currentTarget.value)}
       class="label-input"
       class:zoomed />
   </div>
   <textarea
     bind:this={textEl}
+    use:focusOnInit
     id="sheet-{sheet.id}"
     on:focus={() => dispatch('focus', sheet.id)}
-    on:change={(e) => onEditContent(e.currentTarget.value)}
+    on:input={(e) => onEditContent(e.currentTarget.value)}
     tabindex={sheet.id}
     style="color: var(--{sheet.color}-900); outline-color: var(--{sheet.color}-000)"
     class="sheet-text"

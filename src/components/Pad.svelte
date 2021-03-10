@@ -6,24 +6,18 @@
   export let sheets: SheetType[] = []
 
   let currentSheet = 1
-  let isFullscreen = false
-
-  $: console.log(isFullscreen)
+  let isZoomed = false
 
   function updateSheet(sheet: SheetType) {
     const i = sheets.findIndex((s) => s.id === sheet.id)
     sheets[i] = { ...sheets[i], ...sheet }
   }
-
-  /* function changeSheet(new_sheet_id: number) { */
-  /*   currentSheet = new_sheet_id; */
-  /* } */
 </script>
 
-<Toolbar {sheets} bind:currentSheet bind:fullscreen={isFullscreen} />
+<Toolbar {sheets} bind:currentSheet bind:fullscreen={isZoomed} />
 
 <div class="pad">
-  {#if !isFullscreen}
+  {#if !isZoomed}
     <ul role="list" class="pad-list">
       {#each sheets as sheet (sheet.id)}
         <li class="pad-list-item">
@@ -38,7 +32,7 @@
     </ul>
   {:else}
     <Sheet
-      zoomed={isFullscreen}
+      zoomed={isZoomed}
       sheet={sheets[currentSheet - 1]}
       on:update={(e) => updateSheet(e.detail)} />
   {/if}

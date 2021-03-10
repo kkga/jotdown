@@ -1,50 +1,50 @@
 <script lang="ts">
-  import { onMount, tick, createEventDispatcher } from 'svelte'
-  import type { SheetType } from '../types/sheet.type'
+  import { onMount, tick, createEventDispatcher } from 'svelte';
+  import type { SheetType } from '../types/sheet.type';
 
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher();
 
   const focusOnInit = (node: HTMLElement) =>
-    node && typeof node.focus === 'function' && node.focus()
+    node && typeof node.focus === 'function' && node.focus();
 
-  export let sheet: SheetType
-  export let zoomed = false
-  export let isCurrent = false
+  export let sheet: SheetType;
+  export let zoomed = false;
+  export let isCurrent = false;
 
-  let nameEl: HTMLElement
-  let textEl: HTMLElement
+  let nameEl: HTMLElement;
+  let textEl: HTMLElement;
 
   function update(updatedSheet: Partial<SheetType>) {
-    sheet = { ...sheet, ...updatedSheet }
+    sheet = { ...sheet, ...updatedSheet };
   }
 
   function onEditContent(content: string) {
-    update({ content: content })
-    dispatch('update', sheet)
+    update({ content: content });
+    dispatch('update', sheet);
   }
 
   function onEditName(name: string) {
-    update({ name: name })
-    dispatch('update', sheet)
+    update({ name: name });
+    dispatch('update', sheet);
   }
 
   async function focusTextArea() {
-    await tick()
-    textEl.focus()
+    await tick();
+    textEl.focus();
   }
 
-  $: if (isCurrent) {
-    focusTextArea()
-  }
+  $: color = sheet.content.trim() === '' ? 'gray' : sheet['color'];
+
+  $: if (isCurrent) focusTextArea();
 
   onMount(() => {
-    isCurrent ? textEl.focus() : {}
-  })
+    if (isCurrent) textEl.focus();
+  });
 </script>
 
-<div class="sheet" style="background-color: var(--{sheet.color}-900">
+<div class="sheet" style="background-color: var(--{color}-900">
   <div
-    style="background-color: var(--{sheet.color}-600); color: var(--{sheet.color}-200)"
+    style="background-color: var(--{color}-700); color: var(--{color}-200)"
     class="label-container">
     <input
       type="text"
@@ -61,7 +61,7 @@
     on:focus={() => dispatch('focus', sheet.id)}
     on:input={(e) => onEditContent(e.currentTarget.value)}
     tabindex={sheet.id}
-    style="color: var(--{sheet.color}-200)"
+    style="color: var(--{color}-200)"
     class="sheet-text"
     class:zoomed
     spellcheck="false">{sheet.content}</textarea>

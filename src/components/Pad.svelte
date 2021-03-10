@@ -1,33 +1,31 @@
 <script lang="ts">
-  import Sheet from './Sheet.svelte'
-  import Toolbar from './Toolbar.svelte'
-  import type { SheetType } from '../types/sheet.type'
+  import Sheet from './Sheet.svelte';
+  import Toolbar from './Toolbar.svelte';
+  import type { SheetType } from '../types/sheet.type';
 
-  export let sheets: SheetType[] = []
+  export let sheets: SheetType[] = [];
 
-  $: currentSheet = 1
-  let isZoomed = false
+  $: currentSheet = 1;
+  let isZoomed = false;
 
   function updateSheet(sheet: SheetType) {
-    const i = sheets.findIndex((s) => s.id === sheet.id)
-    sheets[i] = { ...sheets[i], ...sheet }
+    const i = sheets.findIndex((s) => s.id === sheet.id);
+    sheets[i] = { ...sheets[i], ...sheet };
   }
 
   function handleKeydown(e: KeyboardEvent) {
-    console.log(e)
     if (e.ctrlKey && e.key === 'f') {
-      e.preventDefault()
-      isZoomed = !isZoomed
+      e.preventDefault();
+      isZoomed = !isZoomed;
     } else if (e.key === 'Tab') {
-      e.preventDefault()
-      let nextSheet: number
+      e.preventDefault();
+      let nextSheet: number;
       if (e.shiftKey) {
-        nextSheet = currentSheet === 1 ? sheets.length : currentSheet - 1
+        nextSheet = currentSheet === 1 ? sheets.length : currentSheet - 1;
       } else {
-        nextSheet = currentSheet === sheets.length ? 1 : currentSheet + 1
+        nextSheet = currentSheet === sheets.length ? 1 : currentSheet + 1;
       }
-      currentSheet = nextSheet
-      console.log(currentSheet)
+      currentSheet = nextSheet;
     }
   }
 </script>

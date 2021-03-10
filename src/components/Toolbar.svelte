@@ -1,9 +1,17 @@
 <script lang="ts">
-  import type { SheetType } from '../types/sheet.type'
+  import type { SheetType } from '../types/sheet.type';
 
-  export let sheets: SheetType[]
-  export let currentSheet: number
-  export let fullscreen: boolean
+  export let sheets: SheetType[];
+  export let currentSheet: number;
+  export let fullscreen: boolean;
+
+  function isSheetEmpty(sheet_id: number) {
+    return sheets[sheet_id - 1].content.trim() === '';
+  }
+
+  function getSheetColor(sheet_id: number) {
+    return isSheetEmpty(sheet_id) ? 'gray-700' : `${sheets[sheet_id - 1]['color']}-500`;
+  }
 </script>
 
 <div class="container">
@@ -31,7 +39,7 @@
           value="sheet.id"
           class:selected={currentSheet === sheet.id}
           class="sheets-item"
-          style="color: var(--{sheet.color}-400)">
+          style="color: var(--{getSheetColor(sheet.id)})">
           {#if currentSheet !== sheet.id}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -89,10 +97,6 @@
     align-items: center;
   }
 
-  .jotdown {
-    /* text-transform: uppercase; */
-  }
-
   button {
     display: flex;
     justify-content: center;
@@ -102,10 +106,10 @@
     padding: 0;
     border: 0;
     background-color: transparent;
-    color: var(--gray-400);
+    color: var(--gray-500);
   }
   button:hover {
-    background-color: var(--gray-700);
+    background-color: var(--gray-900);
     color: var(--gray-300);
   }
   button:active {

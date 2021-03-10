@@ -42,11 +42,9 @@
   })
 </script>
 
-<div
-  class="sheet"
-  style="color: var(--{sheet.color}-900); background-color: var(--{sheet.color}-200">
+<div class="sheet" style="background-color: var(--{sheet.color}-900">
   <div
-    style="background-color: var(--{sheet.color}-500); color: var(--{sheet.color}-000)"
+    style="background-color: var(--{sheet.color}-600); color: var(--{sheet.color}-200)"
     class="label-container">
     <input
       type="text"
@@ -63,7 +61,7 @@
     on:focus={() => dispatch('focus', sheet.id)}
     on:input={(e) => onEditContent(e.currentTarget.value)}
     tabindex={sheet.id}
-    style="color: var(--{sheet.color}-900); outline-color: var(--{sheet.color}-000)"
+    style="color: var(--{sheet.color}-200)"
     class="sheet-text"
     class:zoomed
     spellcheck="false">{sheet.content}</textarea>
@@ -72,7 +70,7 @@
 <style>
   @keyframes fadeIn {
     from {
-      background-color: #fff;
+      background-color: #ffffff22;
     }
     to {
       background-color: transparent;
@@ -93,10 +91,9 @@
     border: none;
     background-color: transparent;
     color: inherit;
-    font-family: var(--font-mono);
+    font-family: inherit;
     font-size: var(--font-size-s);
     line-height: var(--lh-l);
-    letter-spacing: var(--ls-s);
     font-weight: bold;
     text-transform: uppercase;
     appearance: none;
@@ -112,14 +109,14 @@
     background-color: transparent;
     outline: none;
     border: none;
-    font-family: var(--font-mono);
+    font-family: inherit;
     font-size: var(--font-size-s);
     line-height: var(--lh-m);
     appearance: none;
   }
   .sheet-text.zoomed {
     width: 100%;
-    max-width: 80ch;
+    max-width: var(--width-body);
     margin: 0 auto;
     padding: var(--spacer-m);
     font-size: var(--font-size-l);

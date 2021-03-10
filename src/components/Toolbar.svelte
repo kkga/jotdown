@@ -58,13 +58,13 @@
     </ul>
   {:else}
     <div class="jotdown">
-      <span style="color: var(--blue-400)">j</span>
-      <span style="color: var(--green-400)">o</span>
-      <span style="color: var(--purple-400)">t</span>
-      <span style="color: var(--orange-400)">d</span>
-      <span style="color: var(--red-400)">o</span>
-      <span style="color: var(--pink-400)">w</span>
-      <span style="color: var(--yellow-400)">n</span>
+      <span style="color: var(--blue-400)">J</span><span style="color: var(--green-400)"
+        >o</span
+      ><span style="color: var(--purple-400)">t</span><span
+        style="color: var(--orange-400)">d</span
+      ><span style="color: var(--red-400)">o</span><span style="color: var(--pink-400)"
+        >w</span
+      ><span style="color: var(--yellow-400)">n</span>
     </div>
   {/if}
 
@@ -90,8 +90,7 @@
   }
 
   .jotdown {
-    font-family: var(--font-mono);
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
   }
 
   button {

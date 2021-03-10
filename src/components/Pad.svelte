@@ -54,6 +54,7 @@
   {:else}
     <Sheet
       zoomed={isZoomed}
+      isCurrent
       sheet={sheets[currentSheet - 1]}
       on:update={(e) => updateSheet(e.detail)} />
   {/if}

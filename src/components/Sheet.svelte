@@ -52,7 +52,6 @@
       type="text"
       bind:this={nameEl}
       bind:value={sheet.name}
-      on:focus={() => dispatch('focus', sheet.id)}
       on:input={(e) => onEditName(e.currentTarget.value)}
       class="label-input"
       class:zoomed />
@@ -127,6 +126,6 @@
   }
   .sheet-text:not(.zoomed):focus {
     z-index: 1;
-    animation: 0.25s fadeIn;
+    animation: 0.35s fadeIn;
   }
 </style>

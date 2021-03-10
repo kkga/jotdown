@@ -9,11 +9,13 @@
   --color-text-secondary: #777;
   --color-text-primary: #000;
   --font-main: sans-serif;
+  --font-mono: monospace;
   --font-size-s: 13px;
   --font-size-m: 16px;
   --font-size-l: 18px;
   --lh-m: 1.25;
   --lh-l: 1.75;
+  --ls-s: 0.05em;
   --spacer-s: 8px;
   --spacer-m: 16px;
   --spacer-l: 24px;

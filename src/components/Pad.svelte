@@ -1,18 +1,18 @@
 <script lang="ts">
-  import Sheet from "./Sheet.svelte";
-  import Toolbar from "./Toolbar.svelte";
-  import type { SheetType } from "../types/sheet.type";
+  import Sheet from './Sheet.svelte'
+  import Toolbar from './Toolbar.svelte'
+  import type { SheetType } from '../types/sheet.type'
 
-  export let sheets: SheetType[] = [];
+  export let sheets: SheetType[] = []
 
-  let currentSheet = 1;
-  let isFullscreen = false;
+  let currentSheet = 1
+  let isFullscreen = false
 
-  $: console.log(isFullscreen);
+  $: console.log(isFullscreen)
 
   function updateSheet(sheet: SheetType) {
-    const i = sheets.findIndex((s) => s.id === sheet.id);
-    sheets[i] = { ...sheets[i], ...sheet };
+    const i = sheets.findIndex((s) => s.id === sheet.id)
+    sheets[i] = { ...sheets[i], ...sheet }
   }
 
   /* function changeSheet(new_sheet_id: number) { */
@@ -20,11 +20,7 @@
   /* } */
 </script>
 
-<Toolbar
-  {sheets}
-  bind:currentSheet
-  bind:fullscreen={isFullscreen}
-/>
+<Toolbar {sheets} bind:currentSheet bind:fullscreen={isFullscreen} />
 
 <div class="pad">
   {#if !isFullscreen}
@@ -34,8 +30,7 @@
           <Sheet
             {sheet}
             on:focus={(e) => (currentSheet = e.detail)}
-            on:update={(e) => updateSheet(e.detail)}
-          />
+            on:update={(e) => updateSheet(e.detail)} />
         </li>
       {:else}
         <li>Nothing here!</li>
@@ -45,8 +40,7 @@
     <Sheet
       zoomed={isFullscreen}
       sheet={sheets[currentSheet - 1]}
-      on:update={(e) => updateSheet(e.detail)}
-    />
+      on:update={(e) => updateSheet(e.detail)} />
   {/if}
 </div>
 

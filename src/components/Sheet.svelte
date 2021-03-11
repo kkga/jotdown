@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, tick, createEventDispatcher } from 'svelte';
+  import { tick, createEventDispatcher } from 'svelte';
   import type { SheetType } from '../types/sheet.type';
 
   const dispatch = createEventDispatcher();
@@ -11,8 +11,9 @@
   export let zoomed = false;
   export let isCurrent = false;
 
-  let nameEl: HTMLElement;
-  let textEl: HTMLElement;
+  $: color = sheet.content.trim() === '' ? 'gray' : sheet['color'];
+
+  let textEl: HTMLTextAreaElement;
 
   function update(updatedSheet: Partial<SheetType>) {
     sheet = { ...sheet, ...updatedSheet };
@@ -33,13 +34,7 @@
     textEl.focus();
   }
 
-  $: color = sheet.content.trim() === '' ? 'gray' : sheet['color'];
-
   $: if (isCurrent) focusTextArea();
-
-  onMount(() => {
-    if (isCurrent) textEl.focus();
-  });
 </script>
 
 <div class="sheet" style="background-color: var(--{color}-900">
@@ -48,7 +43,6 @@
     class="label-container">
     <input
       type="text"
-      bind:this={nameEl}
       bind:value={sheet.name}
       on:input={(e) => onEditName(e.currentTarget.value)}
       class="label-input"
@@ -85,7 +79,7 @@
   }
   .label-input {
     width: 100%;
-    padding: 2px var(--spacer-s);
+    padding: var(--spacer-s) var(--spacer-s);
     margin: 0;
     display: block;
     border: none;
@@ -97,6 +91,11 @@
     text-transform: uppercase;
     appearance: none;
     outline-offset: -1px;
+  }
+  @media (min-width: 576px) {
+    .label-input {
+      padding: 4px var(--spacer-s);
+    }
   }
   .label-input:focus {
     outline: 1px solid;
@@ -123,7 +122,7 @@
     width: 100%;
     max-width: var(--width-body);
     margin: 0 auto;
-    padding: var(--spacer-m);
+    padding: var(--spacer-l);
     font-size: var(--font-size-l);
   }
   .sheet-text:not(.zoomed):focus {

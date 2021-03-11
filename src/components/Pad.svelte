@@ -5,8 +5,15 @@
 
   export let sheets: SheetType[] = [];
 
+  const mobileMaxWidth = 576;
+
   $: currentSheet = 1;
+
   let isZoomed = false;
+
+  let windowWidth: number;
+  $: isMobile = windowWidth <= mobileMaxWidth;
+  $: if (isMobile) isZoomed = true;
 
   function updateSheet(sheet: SheetType) {
     const i = sheets.findIndex((s) => s.id === sheet.id);
@@ -14,7 +21,7 @@
   }
 
   function handleKeydown(e: KeyboardEvent) {
-    if (e.ctrlKey && e.key === 'f') {
+    if (e.ctrlKey && e.key === 'f' && !isMobile) {
       e.preventDefault();
       isZoomed = !isZoomed;
     } else if (e.key === 'Tab') {
@@ -30,51 +37,62 @@
   }
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window bind:innerWidth={windowWidth} on:keydown={handleKeydown} />
 
-<Toolbar {sheets} bind:currentSheet bind:fullscreen={isZoomed} />
+<Toolbar {sheets} {isMobile} bind:currentSheet bind:fullscreen={isZoomed} />
 
-<div class="pad">
-  {#if !isZoomed}
-    <ul role="list" class="pad-list">
-      {#each sheets as sheet (sheet.id)}
-        <li class="pad-list-item">
-          <Sheet
-            {sheet}
-            isCurrent={currentSheet === sheet.id}
-            on:focus={(e) => (currentSheet = e.detail)}
-            on:update={(e) => updateSheet(e.detail)} />
-        </li>
-      {:else}
-        <li>Nothing here!</li>
-      {/each}
-    </ul>
-  {:else}
-    <Sheet
-      zoomed={isZoomed}
-      isCurrent
-      sheet={sheets[currentSheet - 1]}
-      on:update={(e) => updateSheet(e.detail)} />
-  {/if}
+<div class="container">
+  <ul role="list" class="pad" class:zoomed={isZoomed}>
+    {#each sheets as sheet (sheet.id)}
+      <li
+        class="pad-item"
+        class:current={currentSheet === sheet.id}
+        class:zoomed={isZoomed}>
+        <Sheet
+          {sheet}
+          zoomed={isZoomed}
+          isCurrent={currentSheet === sheet.id}
+          on:focus={(e) => (currentSheet = e.detail)}
+          on:update={(e) => updateSheet(e.detail)} />
+      </li>
+    {/each}
+  </ul>
 </div>
 
 <style>
-  .pad {
+  .container {
     grid-area: pad;
     display: flex;
     flex-direction: column;
   }
-  .pad-list {
+  .pad {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 2px;
     list-style: none;
     margin: 0;
     padding: 0;
     height: 100%;
   }
-  .pad-list-item {
+  .pad.zoomed {
+    grid-template-columns: 1fr;
+  }
+  .pad-item {
     display: flex;
     flex-flow: column nowrap;
+  }
+  .pad-item.current.zoomed {
+    grid-row: 1/-1;
+    grid-column: 1/-1;
+  }
+
+  .pad.zoomed .pad-item:not(.current) {
+    display: none;
+  }
+
+  @media (min-width: 992px) {
+    .pad:not(.zoomed) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
 </style>

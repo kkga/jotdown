@@ -19,6 +19,9 @@
   --spacer-l: 24px;
   --spacer-xl: 32px;
   --spacer-xxl: 40px;
+  --bp-l: 1200px;
+  --bp-m: 992px;
+  --bp-s: 576px;
 
   --gray-000: #fafbfc;
   --gray-100: #f6f8fa;
@@ -110,13 +113,31 @@ body {
 
 body {
   display: grid;
-  grid-template-rows: max-content 1fr;
+  grid-template-rows: 1fr max-content;
   grid-template-areas:
-    'toolbar'
-    'pad';
+    'pad'
+    'toolbar';
   font-family: var(--font-text);
   font-size: var(--font-size-s);
   line-height: var(--lh-m);
   color: var(--gray-200);
   background-color: var(--color-bg);
+}
+
+@media screen and (min-width: 576px) {
+  body {
+    grid-template-rows: max-content 1fr;
+    grid-template-areas:
+      'toolbar'
+      'pad';
+  }
+}
+
+@media screen and (min-width: 992px) {
+  body {
+    grid-template-rows: max-content 1fr;
+    grid-template-areas:
+      'toolbar'
+      'pad';
+  }
 }

@@ -52,6 +52,7 @@
       bind:value={sheet.name}
       on:input={(e) => onEditName(e.currentTarget.value)}
       class="label-input"
+      style="outline-color: var(--{color}-400)"
       class:zoomed />
   </div>
   <textarea
@@ -61,7 +62,7 @@
     on:focus={() => dispatch('focus', sheet.id)}
     on:input={(e) => onEditContent(e.currentTarget.value)}
     tabindex={sheet.id}
-    style="color: var(--{color}-200)"
+    style="color: var(--{color}-200); outline-color: var(--{color}-400)"
     class="sheet-text"
     class:zoomed
     spellcheck="false">{sheet.content}</textarea>
@@ -82,22 +83,23 @@
     display: flex;
     flex-flow: column nowrap;
   }
-  .label-container {
-    padding: 0 var(--spacer-s);
-  }
   .label-input {
     width: 100%;
+    padding: 2px var(--spacer-s);
+    margin: 0;
     display: block;
     border: none;
     background-color: transparent;
     color: inherit;
     font-family: inherit;
     font-size: var(--font-size-s);
-    line-height: var(--lh-l);
     font-weight: bold;
     text-transform: uppercase;
     appearance: none;
-    outline: none;
+    outline-offset: -1px;
+  }
+  .label-input:focus {
+    outline: 1px solid;
   }
   .label-input.zoomed {
     text-align: center;
@@ -106,6 +108,7 @@
     padding: var(--spacer-s);
     resize: none;
     flex: 1;
+    margin: 0;
     background-color: transparent;
     outline: none;
     border: none;
@@ -113,6 +116,8 @@
     font-size: var(--font-size-s);
     line-height: var(--lh-m);
     appearance: none;
+    outline-offset: -1px;
+    vertical-align: bottom;
   }
   .sheet-text.zoomed {
     width: 100%;
@@ -124,5 +129,6 @@
   .sheet-text:not(.zoomed):focus {
     z-index: 1;
     animation: 0.35s fadeIn;
+    outline: 1px solid;
   }
 </style>

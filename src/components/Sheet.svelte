@@ -39,7 +39,7 @@
 
 <div class="sheet" style="background-color: var(--{color}-900">
   <div
-    style="background-color: var(--{color}-700); color: var(--{color}-200)"
+    style="background-color: var(--{color}-700); color: var(--{color}-100)"
     class="label-container">
     <input
       type="text"
@@ -103,6 +103,10 @@
   .label-input.zoomed {
     text-align: center;
   }
+  .label-input::selection {
+    background-color: white;
+    color: black;
+  }
   .sheet-text {
     padding: var(--spacer-s);
     resize: none;
@@ -129,5 +133,9 @@
     z-index: 1;
     animation: 0.35s fadeIn;
     outline: 1px solid;
+  }
+  .sheet-text::selection {
+    background-color: white;
+    color: black;
   }
 </style>

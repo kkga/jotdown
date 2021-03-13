@@ -177,7 +177,7 @@ packages:
   /autoprefixer/10.2.5_postcss@8.2.8:
     dependencies:
       browserslist: 4.16.3
-      caniuse-lite: 1.0.30001198
+      caniuse-lite: 1.0.30001199
       colorette: 1.2.2
       fraction.js: 4.0.13
       normalize-range: 0.1.2
@@ -218,9 +218,9 @@ packages:
       integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==
   /browserslist/4.16.3:
     dependencies:
-      caniuse-lite: 1.0.30001198
+      caniuse-lite: 1.0.30001199
       colorette: 1.2.2
-      electron-to-chromium: 1.3.686
+      electron-to-chromium: 1.3.687
       escalade: 3.1.1
       node-releases: 1.1.71
     dev: true
@@ -245,10 +245,10 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
-  /caniuse-lite/1.0.30001198:
+  /caniuse-lite/1.0.30001199:
     dev: true
     resolution:
-      integrity: sha512-r5GGgESqOPZzwvdLVER374FpQu2WluCF1Z2DSiFJ89KSmGjT0LVKjgv4NcAqHmGWF9ihNpqRI9KXO9Ex4sKsgA==
+      integrity: sha512-ifbK2eChUCFUwGhlEzIoVwzFt1+iriSjyKKFYNfv6hN34483wyWpLLavYQXhnR036LhkdUYaSDpHg1El++VgHQ==
   /chalk/2.4.2:
     dependencies:
       ansi-styles: 3.2.1
@@ -340,10 +340,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-oSyFlqaTHCItVRGK5RmrmjB+CmaMOW7IaNA/kdxqhoa6d17j/5ce9O9eWXmV/KEdRwqpQA+Vqe8a8Bsybu4YnA==
-  /electron-to-chromium/1.3.686:
+  /electron-to-chromium/1.3.687:
     dev: true
     resolution:
-      integrity: sha512-SOJT3m00NX/gT3sD6E3PcZX6u3+zUmQq4+yp8QCKLOwf2ECnmh9eAY+eonhC/AAu5Gg2WrtUU2m7/+e85O0l6A==
+      integrity: sha512-IpzksdQNl3wdgkzf7dnA7/v10w0Utf1dF2L+B4+gKrloBrxCut+au+kky3PYvle3RMdSxZP+UiCZtLbcYRxSNQ==
   /escalade/3.1.1:
     dev: true
     engines:
@@ -999,10 +999,10 @@ packages:
     resolution:
       integrity: sha512-Qm8k8ojNQIMx7S+Zp8u/uHOx7Qazv3Yv4q68MiWWWOJhiwG5W3x7iqmRtJo8xxrciZUY4vRxUTJCKuRnF28ZZw==
 specifiers:
-  '@rollup/plugin-commonjs': ^17.0.0
-  '@rollup/plugin-node-resolve': ^11.0.0
-  '@rollup/plugin-typescript': ^8.0.0
-  '@tsconfig/svelte': ^1.0.0
+  '@rollup/plugin-commonjs': ^17.1.0
+  '@rollup/plugin-node-resolve': ^11.2.0
+  '@rollup/plugin-typescript': ^8.2.0
+  '@tsconfig/svelte': ^1.0.10
   autoprefixer: ^10.2.5
   postcss: ^8.2.8
   prettier: ^2.2.1
@@ -1010,11 +1010,11 @@ specifiers:
   rollup: ^2.41.1
   rollup-plugin-css-only: ^3.1.0
   rollup-plugin-livereload: ^2.0.0
-  rollup-plugin-svelte: ^7.0.0
-  rollup-plugin-terser: ^7.0.0
-  sirv-cli: ^1.0.0
-  svelte: ^3.0.0
-  svelte-check: ^1.2.4
-  svelte-preprocess: ^4.0.0
-  tslib: ^2.0.0
-  typescript: ^4.0.0
+  rollup-plugin-svelte: ^7.1.0
+  rollup-plugin-terser: ^7.0.2
+  sirv-cli: ^1.0.11
+  svelte: ^3.35.0
+  svelte-check: ^1.2.5
+  svelte-preprocess: ^4.6.9
+  tslib: ^2.1.0
+  typescript: ^4.2.3

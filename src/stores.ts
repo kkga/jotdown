@@ -1,8 +1,8 @@
-import { writable } from 'svelte/store'
-import { localStore } from './localStore.js'
-import type { SheetType } from './types/sheet.type'
+import { writable } from 'svelte/store';
+import { localStore } from './localStore.js';
+import type { SheetType } from './types/sheet.type';
 
-export const alert = writable('Welcome to the todo list app!')
+export const alert = writable('Welcome to the todo list app!');
 
 const initialSheets: SheetType[] = [
 	{
@@ -42,6 +42,13 @@ const initialSheets: SheetType[] = [
 		color: 'pink',
 		content: ''
 	}
-]
+];
 
-export const sheets = localStore<SheetType[]>('jotdown', initialSheets)
+const initialSettings = {
+	theme: 'dark',
+	colorSet: 1,
+	fontSize: 1
+};
+
+export const sheets = localStore<SheetType[]>('jotdown', initialSheets);
+export const settings = localStore('jotdown-settings', initialSettings);

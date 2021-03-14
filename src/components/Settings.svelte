@@ -1,19 +1,26 @@
 <script lang="ts">
   import { fly } from 'svelte/transition';
-  import {createEventDispatcher} from "svelte"
+  import { createEventDispatcher } from 'svelte';
+  import { settings } from '../stores';
   export let show = false;
 
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher();
 
   function onClose() {
     show = false;
-    dispatch("close")
+    dispatch('close');
+  }
+
+  $: theme = $settings.theme;
+
+  function handleThemeChange(theme: string) {
+    $settings.theme = theme;
   }
 </script>
 
 {#if show}
   <div class="backdrop" on:click|self={onClose}>
-    <div transition:fly={{ y: -8, duration: 125 }} class="container">
+    <div transition:fly={{ x: 8, duration: 125 }} class="container">
       <div class="row">
         <div>
           <svg
@@ -37,6 +44,51 @@
       </div>
 
       <hr />
+      <div class="settings-container">
+        <div>Theme</div>
+        <div class="button-group">
+          <button
+            class:active={theme == 'auto'}
+            value="auto"
+            on:click={(e) => handleThemeChange(e.currentTarget.value)}>Auto</button>
+          <button
+            class:active={theme == 'light'}
+            value="light"
+            on:click={(e) => handleThemeChange(e.currentTarget.value)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              width="16"
+              height="16"
+              ><path
+                fill-rule="evenodd"
+                fill="currentColor"
+                d="M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z" /></svg>
+          </button>
+          <button
+            class:active={theme == 'dark'}
+            value="dark"
+            on:click={(e) => handleThemeChange(e.currentTarget.value)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              width="16"
+              height="16"
+              ><path
+                fill-rule="evenodd"
+                fill="currentColor"
+                d="M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z" /></svg>
+          </button>
+        </div>
+        <div>Colors</div>
+        <div class="button-group">
+          <button value="1">1</button>
+          <button value="2">2</button>
+          <button value="0">0</button>
+        </div>
+      </div>
+
+      <hr />
       <h3>Keyboard shortcuts</h3>
 
       <div class="grid">
@@ -47,10 +99,9 @@
       </div>
 
       <hr />
-
       <footer>
         <p>
-          Made by <a href="https://twitter.com/kkga">@kkga</a>. Source:
+          Made by <a href="https://twitter.com/kkga_">@kkga</a>. Source:
           <a href="https://github.com/kkga/jotdown">on GitHub</a>.
         </p>
 
@@ -102,20 +153,22 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: #00000066;
   }
   .container {
     z-index: 100;
     font-size: 13px;
     font-family: sans-serif;
     position: absolute;
-    top: 40px;
-    right: 8px;
+    top: 32px;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-flow: column nowrap;
     padding: var(--spacer-m);
     width: 20rem;
-    background-color: white;
-    color: var(--gray-900);
-    box-shadow: 0 12px 48px #00000066;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    border-top: 1px solid var(--color-bg-secondary);
   }
   svg {
     vertical-align: bottom;
@@ -125,10 +178,39 @@
     font-size: 1.125rem;
     letter-spacing: -0.04em;
   }
-
   h3 {
     margin: 0 0 var(--spacer-s);
     font-size: inherit;
+  }
+
+  .settings-container {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: var(--spacer-s);
+    align-items: center;
+  }
+
+  .button-group {
+    display: flex;
+  }
+  .button-group > button:not(:first-child) {
+    margin-left: -1px;
+  }
+  button {
+    flex: 1;
+    border: none;
+    height: 2rem;
+    appearance: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-tertiary);
+    border: 1px solid var(--color-bg-tertiary);
+  }
+  button.active {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-accent);
   }
 
   .row {
@@ -152,21 +234,21 @@
     margin: var(--spacer-m) 0;
     border: none;
     height: 1px;
-    background-color: var(--gray-200);
+    background-color: var(--color-bg-tertiary);
   }
   p {
     margin: 0;
   }
 
   footer {
+    margin-top: auto;
     padding: var(--spacer-s);
     font-size: 12px;
-    background-color: var(--gray-100);
-    border: 1px solid var(--gray-200);
-    color: var(--gray-600);
+    border: 1px solid var(--color-bg-tertiary);
+    color: var(--color-text-tertiary);
   }
   footer a {
-    color: var(--blue-600);
+    color: var(--color-text-accent);
     text-decoration: none;
   }
   footer hr {

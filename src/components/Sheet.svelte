@@ -40,13 +40,13 @@
 <div
   class="sheet"
   style="
-  --sheet-bg: var(--{color}-900);
-  --sheet-text: var(--{color}-100);
-  --label-bg: var(--{color}-700);
-  --label-text: var(--{color}-100);
-  --outline-color: var(--{color}-300);
-  --selection-bg: var(--{color}-100);
-  --selection-text: var(--{color}-900)">
+  --sheet-bg: var(--sheet-{color}-bg);
+  --sheet-text: var(--sheet-{color}-text);
+  --label-bg: var(--sheet-{color}-label-bg);
+  --label-text: var(--sheet-{color}-label-text);
+  --outline-color: var(--sheet-{color}-outline);
+  --selection-bg: var(--sheet-{color}-sel-bg);
+  --selection-text: var(--sheet-{color}-sel-text)">
   <div class="label-container">
     <input
       type="text"

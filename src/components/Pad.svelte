@@ -4,7 +4,7 @@
   import type { SheetType } from '../types/sheet.type';
 
   export let sheets: SheetType[] = [];
-  export let handleInput= true
+  export let handleInput = true;
 
   const mobileMaxWidth = 576;
 
@@ -23,8 +23,8 @@
 
   function handleKeydown(e: KeyboardEvent) {
     if (!handleInput) {
-      e.preventDefault()
-      return
+      e.preventDefault();
+      return;
     } else if (e.ctrlKey && e.key === 'f' && !isMobile) {
       e.preventDefault();
       isZoomed = !isZoomed;
@@ -39,7 +39,6 @@
       currentSheet = nextSheet;
     }
   }
-
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} on:keydown={handleKeydown} />

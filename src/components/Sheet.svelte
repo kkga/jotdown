@@ -37,16 +37,22 @@
   $: if (isCurrent) focusTextArea();
 </script>
 
-<div class="sheet" style="background-color: var(--{color}-900">
-  <div
-    style="background-color: var(--{color}-700); color: var(--{color}-100)"
-    class="label-container">
+<div
+  class="sheet"
+  style="
+  --sheet-bg: var(--{color}-900);
+  --sheet-text: var(--{color}-100);
+  --label-bg: var(--{color}-700);
+  --label-text: var(--{color}-100);
+  --outline-color: var(--{color}-300);
+  --selection-bg: var(--{color}-100);
+  --selection-text: var(--{color}-900)">
+  <div class="label-container">
     <input
       type="text"
       bind:value={sheet.name}
       on:input={(e) => onEditName(e.currentTarget.value)}
       class="label-input"
-      style="outline-color: var(--{color}-400)"
       class:zoomed />
   </div>
   <textarea
@@ -56,7 +62,6 @@
     on:focus={() => dispatch('focus', sheet.id)}
     on:input={(e) => onEditContent(e.currentTarget.value)}
     tabindex={sheet.id}
-    style="color: var(--{color}-200); outline-color: var(--{color}-400)"
     class="sheet-text"
     class:zoomed
     spellcheck="false">{sheet.content}</textarea>
@@ -76,6 +81,11 @@
     flex: 1;
     display: flex;
     flex-flow: column nowrap;
+    background-color: var(--sheet-bg);
+  }
+  .label-container {
+    background-color: var(--label-bg);
+    color: var(--label-text);
   }
   .label-input {
     width: 100%;
@@ -91,6 +101,7 @@
     text-transform: uppercase;
     appearance: none;
     outline-offset: -1px;
+    outline-color: var(--outline-color);
   }
   @media (min-width: 576px) {
     .label-input {
@@ -98,14 +109,15 @@
     }
   }
   .label-input:focus {
-    outline: 1px solid;
+    outline-width: 1px;
+    outline-style: solid;
   }
   .label-input.zoomed {
     text-align: center;
   }
   .label-input::selection {
-    background-color: white;
-    color: black;
+    background-color: var(--selection-bg);
+    color: var(--selection-text);
   }
   .sheet-text {
     padding: var(--spacer-s);
@@ -113,6 +125,7 @@
     flex: 1;
     margin: 0;
     background-color: transparent;
+    color: var(--sheet-text);
     outline: none;
     border: none;
     font-family: inherit;
@@ -120,6 +133,7 @@
     line-height: var(--lh-m);
     appearance: none;
     outline-offset: -1px;
+    outline-color: var(--outline-color);
     vertical-align: bottom;
   }
   .sheet-text.zoomed {
@@ -132,10 +146,11 @@
   .sheet-text:not(.zoomed):focus {
     z-index: 1;
     animation: 0.35s fadeIn;
-    outline: 1px solid;
+    outline-width: 1px;
+    outline-style: solid;
   }
   .sheet-text::selection {
-    background-color: white;
-    color: black;
+    background-color: var(--selection-bg);
+    color: var(--selection-text);
   }
 </style>

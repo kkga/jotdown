@@ -4,9 +4,7 @@
   import { sheets, settings } from './stores';
 
   let settingsOpen = false;
-
-  $: dark = $settings.theme === 'dark';
-  $: light = $settings.theme === 'light';
+  $: document.body.className = $settings.theme;
 
   function handleKeydown(e: KeyboardEvent) {
     if (settingsOpen && e.key == 'Escape') {
@@ -17,17 +15,19 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<div class="app" class:dark class:light>
-  <Settings on:close={() => (settingsOpen = false)} show={true} />
-  <Pad
-    handleInput={!settingsOpen}
-    bind:sheets={$sheets}
-    on:settingsToggled={() => (settingsOpen = !settingsOpen)} />
-</div>
+<Settings on:close={() => (settingsOpen = false)} show={true} />
+<Pad
+  handleInput={!settingsOpen}
+  bind:sheets={$sheets}
+  on:settingsToggled={() => (settingsOpen = !settingsOpen)} />
 
 <style>
-  .app {
-    flex: 1;
+  :global(html) {
+    height: 100%;
+  }
+  :global(body) {
+    min-height: 100%;
+    margin: 0;
     display: grid;
     grid-template-rows: 1fr max-content;
     grid-template-areas:
@@ -41,16 +41,7 @@
   }
 
   @media screen and (min-width: 576px) {
-    .app {
-      grid-template-rows: max-content 1fr;
-      grid-template-areas:
-        'toolbar'
-        'pad';
-    }
-  }
-
-  @media screen and (min-width: 992px) {
-    .app {
+    :global(body) {
       grid-template-rows: max-content 1fr;
       grid-template-areas:
         'toolbar'

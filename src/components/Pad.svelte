@@ -23,7 +23,6 @@
 
   function handleKeydown(e: KeyboardEvent) {
     if (!handleInput) {
-      e.preventDefault();
       return;
     } else if (e.ctrlKey && e.key === 'f' && !isMobile) {
       e.preventDefault();

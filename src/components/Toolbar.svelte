@@ -14,7 +14,9 @@
   }
 
   function getSheetColor(sheet_id: number) {
-    return isSheetEmpty(sheet_id) ? 'gray-700' : `${sheets[sheet_id - 1]['color']}-500`;
+    return isSheetEmpty(sheet_id)
+      ? 'sheet-gray-label-bg'
+      : `sheet-${sheets[sheet_id - 1]['color']}-label-bg`;
   }
 </script>
 
@@ -73,15 +75,7 @@
       {/each}
     </ul>
   {:else}
-    <div class="jotdown">
-      <span style="color: var(--blue-400)">J</span><span style="color: var(--green-400)"
-        >o</span
-      ><span style="color: var(--purple-400)">t</span><span
-        style="color: var(--orange-400)">d</span
-      ><span style="color: var(--red-400)">o</span><span style="color: var(--pink-400)"
-        >w</span
-      ><span style="color: var(--yellow-400)">n</span>
-    </div>
+    <div class="jotdown">Jotdown</div>
   {/if}
 
   <button on:click={() => dispatch('settingsToggled', {})} style="grid-column: -1;">
@@ -124,6 +118,10 @@
     display: flex;
     padding: 0;
     margin: 0;
+  }
+  .jotdown {
+    font-family: var(--font-ui);
+    color: var(--color-text-tertiary);
   }
 
   @media (min-width: 576px) {

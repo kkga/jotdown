@@ -82,8 +82,10 @@
 }
 
 :root {
-  --font-text: 'Recursive', monospace;
-  --font-ui: sans-serif;
+  --font-cursive: 'Recursive', monospace;
+  --font-ui: -apple-system, system-ui, BlinkMacSystemFont, avenir next, avenir,
+    helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+  --font-mono: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
   --font-size-xs: 13px;
   --font-size-s: 14px;
   --font-size-m: 16px;
@@ -100,6 +102,12 @@
   --bp-l: 1200px;
   --bp-m: 992px;
   --bp-s: 576px;
+
+  --sheet-font-cursive: var(--font-cursive);
+  --sheet-font-system: var(--font-ui);
+
+  --sheet-font-size-s: var(--font-size-s);
+  --sheet-font-size-m: var(--font-size-m);
 }
 
 .sheet.blue {
@@ -131,9 +139,9 @@ body.light {
     --color-bg-secondary: var(--gray-200);
     --color-bg-tertiary: var(--gray-300);
 
-    --sheet-unused-bg: var(--gray-200);
+    --sheet-unused-bg: var(--gray-100);
     --sheet-unused-text: var(--gray-900);
-    --sheet-unused-label-bg: var(--gray-400);
+    --sheet-unused-label-bg: var(--gray-200);
     --sheet-unused-label-text: var(--gray-900);
     --sheet-unused-outline: var(--gray-000);
     --sheet-unused-sel-bg: var(--gray-900);
@@ -141,65 +149,65 @@ body.light {
 
     --sheet-gray-bg: var(--gray-200);
     --sheet-gray-text: var(--gray-900);
-    --sheet-gray-label-bg: var(--gray-400);
+    --sheet-gray-label-bg: var(--gray-300);
     --sheet-gray-label-text: var(--gray-900);
-    --sheet-gray-outline: var(--gray-000);
+    --sheet-gray-outline: var(--gray-500);
     --sheet-gray-sel-bg: var(--gray-900);
     --sheet-gray-sel-text: var(--gray-100);
 
     --sheet-blue-bg: var(--blue-200);
     --sheet-blue-text: var(--blue-900);
-    --sheet-blue-label-bg: var(--blue-400);
+    --sheet-blue-label-bg: var(--blue-300);
     --sheet-blue-label-text: var(--blue-900);
-    --sheet-blue-outline: var(--blue-000);
+    --sheet-blue-outline: var(--blue-500);
     --sheet-blue-sel-bg: var(--blue-900);
     --sheet-blue-sel-text: var(--blue-100);
 
     --sheet-purple-bg: var(--purple-200);
     --sheet-purple-text: var(--purple-900);
-    --sheet-purple-label-bg: var(--purple-400);
+    --sheet-purple-label-bg: var(--purple-300);
     --sheet-purple-label-text: var(--purple-900);
-    --sheet-purple-outline: var(--purple-000);
+    --sheet-purple-outline: var(--purple-500);
     --sheet-purple-sel-bg: var(--purple-900);
     --sheet-purple-sel-text: var(--purple-100);
 
     --sheet-green-bg: var(--green-200);
     --sheet-green-text: var(--green-900);
-    --sheet-green-label-bg: var(--green-400);
+    --sheet-green-label-bg: var(--green-300);
     --sheet-green-label-text: var(--green-900);
-    --sheet-green-outline: var(--green-000);
+    --sheet-green-outline: var(--green-400);
     --sheet-green-sel-bg: var(--green-900);
     --sheet-green-sel-text: var(--green-100);
 
     --sheet-orange-bg: var(--orange-200);
     --sheet-orange-text: var(--orange-900);
-    --sheet-orange-label-bg: var(--orange-400);
+    --sheet-orange-label-bg: var(--orange-300);
     --sheet-orange-label-text: var(--orange-900);
-    --sheet-orange-outline: var(--orange-000);
+    --sheet-orange-outline: var(--orange-500);
     --sheet-orange-sel-bg: var(--orange-900);
     --sheet-orange-sel-text: var(--orange-100);
 
     --sheet-red-bg: var(--red-200);
     --sheet-red-text: var(--red-900);
-    --sheet-red-label-bg: var(--red-400);
+    --sheet-red-label-bg: var(--red-300);
     --sheet-red-label-text: var(--red-900);
-    --sheet-red-outline: var(--red-000);
+    --sheet-red-outline: var(--red-500);
     --sheet-red-sel-bg: var(--red-900);
     --sheet-red-sel-text: var(--red-100);
 
     --sheet-pink-bg: var(--pink-200);
     --sheet-pink-text: var(--pink-900);
-    --sheet-pink-label-bg: var(--pink-400);
+    --sheet-pink-label-bg: var(--pink-300);
     --sheet-pink-label-text: var(--pink-900);
-    --sheet-pink-outline: var(--pink-000);
+    --sheet-pink-outline: var(--pink-500);
     --sheet-pink-sel-bg: var(--pink-900);
     --sheet-pink-sel-text: var(--pink-100);
 
     --sheet-yellow-bg: var(--yellow-200);
     --sheet-yellow-text: var(--yellow-900);
-    --sheet-yellow-label-bg: var(--yellow-400);
+    --sheet-yellow-label-bg: var(--yellow-300);
     --sheet-yellow-label-text: var(--yellow-900);
-    --sheet-yellow-outline: var(--yellow-000);
+    --sheet-yellow-outline: var(--yellow-500);
     --sheet-yellow-sel-bg: var(--yellow-900);
     --sheet-yellow-sel-text: var(--yellow-100);
   }

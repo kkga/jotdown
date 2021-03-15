@@ -14,6 +14,8 @@
 
   $: useColors = $settings.colorSet === 1;
   $: color = sheet.content.trim() === '' ? 'unused' : useColors ? sheet['color'] : 'gray';
+  $: fontSize = ['s', 'm'][$settings.fontSize - 1];
+  $: font = $settings.font;
 
   let textEl: HTMLTextAreaElement;
 
@@ -48,7 +50,9 @@
   --label-text: var(--sheet-{color}-label-text);
   --outline-color: var(--sheet-{color}-outline);
   --selection-bg: var(--sheet-{color}-sel-bg);
-  --selection-text: var(--sheet-{color}-sel-text)">
+  --selection-text: var(--sheet-{color}-sel-text);
+  --font: var(--sheet-font-{font});
+  --font-size: var(--sheet-font-size-{fontSize})">
   <div class="label-container">
     <input
       type="text"
@@ -97,11 +101,11 @@
     border: none;
     background-color: transparent;
     color: inherit;
-    font-family: inherit;
-    font-size: var(--font-size-s);
+    font-family: var(--font);
+    font-size: var(--font-size);
     font-weight: bold;
-    text-transform: uppercase;
     appearance: none;
+    letter-spacing: -0.025em;
     outline-offset: -1px;
     outline-color: var(--outline-color);
   }
@@ -130,8 +134,8 @@
     color: var(--sheet-text);
     outline: none;
     border: none;
-    font-family: inherit;
-    font-size: var(--font-size-s);
+    font-family: var(--font);
+    font-size: var(--font-size);
     line-height: var(--lh-m);
     appearance: none;
     outline-offset: -1px;

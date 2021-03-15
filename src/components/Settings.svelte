@@ -15,13 +15,23 @@
 
   $: theme = $settings.theme;
   $: colorset = $settings.colorSet;
+  $: font = $settings.font;
+  $: fontSize = $settings.fontSize;
 
-  function handleThemeChange(theme: string) {
+  function handleThemeChange(theme: 'dark' | 'light' | 'auto') {
     $settings.theme = theme;
   }
 
   function handleColorsetChange(colorset: number) {
     $settings.colorSet = colorset;
+  }
+
+  function handleFontChange(font: 'cursive' | 'system') {
+    $settings.font = font;
+  }
+
+  function handleFontSizeChange(fontSize: 1 | 2) {
+    $settings.fontSize = fontSize;
   }
 </script>
 
@@ -46,6 +56,7 @@
 
   <hr />
 
+  <h3>Appearance</h3>
   <div class="settings-container">
     <div>Theme</div>
     <ButtonGroup>
@@ -65,9 +76,9 @@
             d="M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z" /></svg>
       </Button>
       <Button
-        active={theme === 'light'}
+        active={theme === 'dark'}
         value="dark"
-        on:click={() => handleThemeChange('light')}>
+        on:click={() => handleThemeChange('dark')}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"
           ><path
             fill-rule="evenodd"
@@ -108,14 +119,17 @@
     </ButtonGroup>
     <div>Font</div>
     <ButtonGroup>
-      <Button><span style="font-family: var(--font-text)">Recursive</span></Button>
-      <Button>System</Button>
+      <Button on:click={() => handleFontChange('cursive')} active={font === 'cursive'}
+        ><span style="font-family: var(--font-cursive)">Recursive</span></Button>
+      <Button on:click={() => handleFontChange('system')} active={font === 'system'}
+        >System</Button>
     </ButtonGroup>
     <div>Font size</div>
     <ButtonGroup>
-      <Button>Small</Button>
-      <Button>Medium</Button>
-      <Button>Large</Button>
+      <Button on:click={() => handleFontSizeChange(1)} active={fontSize === 1}
+        >Small</Button>
+      <Button on:click={() => handleFontSizeChange(2)} active={fontSize === 2}
+        >Medium</Button>
     </ButtonGroup>
   </div>
 

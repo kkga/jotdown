@@ -121,6 +121,7 @@
   }
   .jotdown {
     font-family: var(--font-ui);
+    font-weight: 600;
     color: var(--color-text-tertiary);
   }
 

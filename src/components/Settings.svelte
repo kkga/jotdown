@@ -111,15 +111,21 @@
       <Button><span style="font-family: var(--font-text)">Recursive</span></Button>
       <Button>System</Button>
     </ButtonGroup>
+    <div>Font size</div>
+    <ButtonGroup>
+      <Button>Small</Button>
+      <Button>Medium</Button>
+      <Button>Large</Button>
+    </ButtonGroup>
   </div>
 
   <hr />
   <h3>Keyboard shortcuts</h3>
 
-  <div class="grid">
-    <div>Switch sheets</div>
-    <div><kbd>Tab</kbd> / <kbd>Shift-Tab</kbd></div>
-    <div>Toggle zoom</div>
+  <div class="shortcuts-container">
+    <div>Cycle</div>
+    <div><kbd>Tab</kbd> <kbd>Shift-Tab</kbd></div>
+    <div>Zoom</div>
     <div><kbd>Ctrl-F</kbd></div>
   </div>
 
@@ -171,8 +177,26 @@
     letter-spacing: -0.04em;
   }
   h3 {
-    margin: 0 0 var(--spacer-s);
+    margin: 0 0 var(--spacer-m);
     font-size: inherit;
+    color: var(--color-text-secondary);
+  }
+
+  .shortcuts-container {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: var(--spacer-s);
+    align-items: baseline;
+  }
+  kbd {
+    /* text-transform: uppercase; */
+    display: inline-block;
+    font-family: var(--font-ui);
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-secondary);
+    padding: 1px 4px;
+    border: 1px solid var(--color-bg-tertiary);
+    box-shadow: 0 2px 0 var(--color-bg-tertiary);
   }
 
   .settings-container {
@@ -183,8 +207,12 @@
   }
 
   .row {
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: auto;
     align-items: center;
+    justify-items: flex-start;
+    justify-content: flex-start;
     gap: var(--spacer-s);
   }
   .row.justify-center {
@@ -192,11 +220,6 @@
   }
   .row:not(:first-child):not(:last-child) {
     margin: var(--spacer-s) 0;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    gap: var(--spacer-s);
   }
 
   hr {

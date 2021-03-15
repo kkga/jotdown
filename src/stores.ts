@@ -1,8 +1,5 @@
-import { writable } from 'svelte/store';
 import { localStore } from './localStore.js';
 import type { SheetType } from './types/sheet.type';
-
-export const alert = writable('Welcome to the todo list app!');
 
 const initialSheets: SheetType[] = [
 	{
@@ -47,6 +44,7 @@ const initialSheets: SheetType[] = [
 const initialSettings = {
 	theme: 'dark',
 	colorSet: 1,
+	font: 'cursive',
 	fontSize: 1
 };
 

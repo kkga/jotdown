@@ -15,7 +15,7 @@
   }
 </script>
 
-<div class="container">
+<div class="flex justify-between items-center">
   {#if isMobile}
     <button style="visibility: hidden" />
   {:else}
@@ -37,7 +37,7 @@
   {/if}
 
   {#if fullscreen}
-    <ul class="sheets">
+    <ul class="flex flex-row">
       {#each sheets as sheet (sheet.id)}
         <button
           on:click={() => (currentSheet = sheet.id)}
@@ -91,13 +91,6 @@
 </div>
 
 <style>
-  .container {
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
   button {
     display: flex;
     justify-content: center;
@@ -116,12 +109,6 @@
   button:active {
     background-color: var(--gray-800);
   }
-  .sheets {
-    display: flex;
-    padding: 0;
-    margin: 0;
-  }
-
   @media (min-width: 576px) {
     button {
       width: 2rem;

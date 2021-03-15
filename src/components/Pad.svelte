@@ -41,13 +41,13 @@
 
 <Toolbar {sheets} {isMobile} bind:currentSheet bind:fullscreen={isZoomed} />
 
-<div class="container">
-  <ul role="list" class="pad" class:zoomed={isZoomed}>
+<div class="flex flex-col">
+  <ul role="list" class="flex-1 grid grid-cols-3 gap-0.5">
     {#each sheets as sheet (sheet.id)}
       <li
-        class="pad-item"
-        class:current={currentSheet === sheet.id}
-        class:zoomed={isZoomed}>
+        class="flex flex-col"
+        class:hidden={isZoomed && currentSheet !== sheet.id}
+        class:col-span-full={isZoomed && currentSheet === sheet.id}>
         <Sheet
           {sheet}
           zoomed={isZoomed}
@@ -58,41 +58,3 @@
     {/each}
   </ul>
 </div>
-
-<style>
-  .container {
-    grid-area: pad;
-    display: flex;
-    flex-direction: column;
-  }
-  .pad {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 2px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-  .pad.zoomed {
-    grid-template-columns: 1fr;
-  }
-  .pad-item {
-    display: flex;
-    flex-flow: column nowrap;
-  }
-  .pad-item.current.zoomed {
-    grid-row: 1/-1;
-    grid-column: 1/-1;
-  }
-
-  .pad.zoomed .pad-item:not(.current) {
-    display: none;
-  }
-
-  @media (min-width: 992px) {
-    .pad:not(.zoomed) {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-  }
-</style>

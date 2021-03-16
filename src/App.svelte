@@ -15,7 +15,7 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<Settings on:close={() => (settingsOpen = false)} show={settingsOpen} />
+<Settings on:close={() => (settingsOpen = false)} show={true} />
 <Pad
   handleInput={!settingsOpen}
   bind:sheets={$sheets}

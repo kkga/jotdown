@@ -19,7 +19,8 @@
   }
 </script>
 
-<div class="flex justify-between items-center text-gray-500 bg-gray-50 dark:bg-gray-900">
+<div
+  class="flex text-sm justify-between items-center text-gray-500 bg-gray-50 dark:bg-gray-900">
   {#if isMobile}
     <button style="visibility: hidden" />
   {:else}

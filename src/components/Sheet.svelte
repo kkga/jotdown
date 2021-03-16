@@ -13,9 +13,10 @@
   export let isCurrent = false;
 
   $: useColors = $settings.colorSet === 1;
-  $: color = sheet.content.trim() === '' ? 'unused' : useColors ? sheet['color'] : 'gray';
-  $: fontSize = ['s', 'm'][$settings.fontSize - 1];
-  $: font = $settings.font;
+  $: color =
+    sheet.content.trim() === '' ? 'transparent' : useColors ? sheet['color'] : 'gray';
+  $: fontSize = ['sm', 'base'][$settings.fontSize - 1];
+  $: font = $settings.font === 'cursive' ? 'cursive' : 'sans';
 
   let textEl: HTMLTextAreaElement;
 
@@ -41,13 +42,14 @@
   $: if (isCurrent) focusTextArea();
 </script>
 
-<div class="flex-1 flex flex-col bg-{color}-800">
-  <div class="bg-{color}-900">
+<div
+  class="flex-1 flex flex-col font-{font} text-{fontSize} bg-{color}-100 dark:bg-{color}-800">
+  <div class="bg-{color}-200 dark:bg-{color}-900">
     <input
       type="text"
       bind:value={sheet.name}
       on:input={(e) => onEditName(e.currentTarget.value)}
-      class="p-2 font-semibold uppercase border-b border-{color}-700 text-{color}-300 bg-transparent w-full"
+      class="px-2 py-1 font-semibold leading-none uppercase border-b border-{color}-200 dark:border-{color}-700 text-{color}-700 dark:text-{color}-300 bg-transparent w-full"
       class:text-center={zoomed} />
   </div>
   <textarea
@@ -57,7 +59,7 @@
     on:focus={() => dispatch('focus', sheet.id)}
     on:input={(e) => onEditContent(e.currentTarget.value)}
     tabindex={sheet.id}
-    class="p-2 w-full m-auto flex-1 outline-none text-{color}-200 bg-transparent resize-none"
+    class="p-2 w-full m-auto flex-1 outline-none text-{color}-700 dark:text-{color}-200 bg-transparent resize-none"
     class:max-w-4xl={zoomed}
     class:text-xl={zoomed}
     class:p-8={zoomed}

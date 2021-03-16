@@ -9,12 +9,17 @@ module.exports = {
 			]
 		}
 	},
-	darkMode: false, // or 'media' or 'class'
+	darkMode: 'class', // or 'media' or 'class'
 	theme: {
+		fontFamily: {
+			cursive: ['Recursive', 'sans-serif']
+		},
 		extend: {}
 	},
 	variants: {
-		extend: {}
+		extend: {
+			backgroundColor: ['active']
+		}
 	},
 	plugins: []
 };

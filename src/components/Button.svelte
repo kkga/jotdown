@@ -1,36 +1,12 @@
 <script lang="ts">
-  export let value: any;
-  export let active: boolean;
+  export let value: any = undefined;
+  export let color = 'gray';
+  export let textColor = 'gray';
 </script>
 
-<button {value} class:active on:click>
+<button
+  {value}
+  class="p-2 h-8 flex justify-center items-center text-{textColor}-500 bg-{color}-50 ring-inset focus:ring-2 hover:bg-{color}-100 active:bg-{color}-200"
+  on:click>
   <slot>Button</slot>
 </button>
-
-<style>
-  button {
-    flex: 1;
-    height: 2rem;
-    margin: 0;
-    padding: 0 var(--spacer-s);
-    appearance: none;
-    border-radius: 0;
-    outline-color: var(--color-text-accent);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--color-bg-primary);
-    color: var(--color-text-secondary);
-    border: 1px solid var(--color-bg-tertiary);
-    font-size: inherit;
-  }
-  button.active {
-    background-color: var(--color-bg-secondary);
-    color: var(--color-text-primary);
-  }
-  button:focus-visible {
-    outline: 0;
-    z-index: 1;
-    box-shadow: 0 0 0 2px var(--color-text-accent);
-  }
-</style>

@@ -1,12 +1,9 @@
-<div class="button-group">
+<div class="flex flex-row button-group">
   <slot />
 </div>
 
-<style>
-  .button-group {
-    display: flex;
-  }
-  :global(.button-group > *:not(:first-child)) {
-    margin-left: -1px;
+<style lang="postcss">
+  :global(.button-group > *) {
+    @apply flex-1;
   }
 </style>

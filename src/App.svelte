@@ -13,11 +13,9 @@
   }
 </script>
 
-<Pad bind:sheets={$sheets} />
-
 <svelte:window on:keydown={handleKeydown} />
 
-<Settings on:close={() => (settingsOpen = false)} show={true} />
+<Settings on:close={() => (settingsOpen = false)} show={settingsOpen} />
 <Pad
   handleInput={!settingsOpen}
   bind:sheets={$sheets}
@@ -27,30 +25,17 @@
   @tailwind base;
   @tailwind components;
   @tailwind utilities;
-  :global(html) {
+
+  body,
+  html {
     height: 100%;
   }
-  :global(body) {
-    min-height: 100%;
-    margin: 0;
-    display: grid;
-    grid-template-rows: 1fr max-content;
-    grid-template-areas:
-      'pad'
-      'toolbar';
-    font-family: var(--font-text);
-    font-size: var(--font-size-s);
-    line-height: var(--lh-m);
-    color: var(--color-text-primary);
-    background-color: var(--color-bg-pure);
+
+  body {
+    @apply flex flex-col bg-gray-50;
   }
 
-  @media screen and (min-width: 576px) {
-    :global(body) {
-      grid-template-rows: max-content 1fr;
-      grid-template-areas:
-        'toolbar'
-        'pad';
-    }
+  body.dark {
+    @apply bg-gray-900;
   }
 </style>

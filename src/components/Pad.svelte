@@ -49,7 +49,7 @@
   bind:currentSheet
   bind:fullscreen={isZoomed} />
 
-<div class="flex flex-col">
+<div class="flex-1 flex flex-col">
   <ul role="list" class="flex-1 grid grid-cols-3 gap-0.5">
     {#each sheets as sheet (sheet.id)}
       <li

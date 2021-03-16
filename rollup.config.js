@@ -47,7 +47,7 @@ export default {
 			preprocess: sveltePreprocess({
 				sourceMap: !production,
 				postcss: {
-					plugins: [require('autoprefixer')(), require('tailwindcss')()]
+					plugins: [require('autoprefixer'), require('tailwindcss')]
 				}
 			}),
 			compilerOptions: {

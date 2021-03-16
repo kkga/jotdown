@@ -24,7 +24,7 @@
   {#if isMobile}
     <button style="visibility: hidden" />
   {:else}
-    <Button on:click={() => (fullscreen = !fullscreen)}>
+    <Button ghost on:click={() => (fullscreen = !fullscreen)}>
       {#if fullscreen}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"
           ><path
@@ -46,6 +46,7 @@
       {#each sheets as sheet (sheet.id)}
         <!-- TODO use SheetButton component -->
         <Button
+          ghost
           on:click={() => (currentSheet = sheet.id)}
           value="sheet.id"
           textColor={getSheetColor(sheet.id)}>
@@ -77,7 +78,7 @@
     <div class="jotdown">Jotdown</div>
   {/if}
 
-  <Button on:click={() => dispatch('settingsToggled', {})}>
+  <Button ghost on:click={() => dispatch('settingsToggled', {})}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"
       ><path
         fill-rule="evenodd"

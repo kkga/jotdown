@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
   import type { SheetType } from '../types/sheet.type';
+
+  const dispatch = createEventDispatcher();
 
   export let sheets: SheetType[];
   export let currentSheet: number;
@@ -11,7 +14,9 @@
   }
 
   function getSheetColor(sheet_id: number) {
-    return isSheetEmpty(sheet_id) ? 'gray-700' : `${sheets[sheet_id - 1]['color']}-500`;
+    return isSheetEmpty(sheet_id)
+      ? 'sheet-gray-label-bg'
+      : `sheet-${sheets[sheet_id - 1]['color']}-label-bg`;
   }
 </script>
 
@@ -70,18 +75,10 @@
       {/each}
     </ul>
   {:else}
-    <div class="jotdown">
-      <span style="color: var(--blue-400)">J</span><span style="color: var(--green-400)"
-        >o</span
-      ><span style="color: var(--purple-400)">t</span><span
-        style="color: var(--orange-400)">d</span
-      ><span style="color: var(--red-400)">o</span><span style="color: var(--pink-400)"
-        >w</span
-      ><span style="color: var(--yellow-400)">n</span>
-    </div>
+    <div class="jotdown">Jotdown</div>
   {/if}
 
-  <button style="visibility: hidden; grid-column: -1;">
+  <button on:click={() => dispatch('settingsToggled', {})} style="grid-column: -1;">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"
       ><path
         fill-rule="evenodd"
@@ -100,19 +97,13 @@
     padding: 0;
     border: 0;
     background-color: transparent;
-    color: var(--gray-500);
+    color: var(--color-text-tertiary);
   }
   button:hover {
-    background-color: var(--gray-900);
-    color: var(--gray-300);
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
   }
   button:active {
-    background-color: var(--gray-800);
-  }
-  @media (min-width: 576px) {
-    button {
-      width: 2rem;
-      height: 2rem;
-    }
+    background-color: var(--color-bg-tertiary);
   }
 </style>

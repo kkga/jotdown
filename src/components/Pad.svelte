@@ -4,6 +4,7 @@
   import type { SheetType } from '../types/sheet.type';
 
   export let sheets: SheetType[] = [];
+  export let handleInput = true;
 
   const mobileMaxWidth = 576;
 
@@ -21,7 +22,9 @@
   }
 
   function handleKeydown(e: KeyboardEvent) {
-    if (e.ctrlKey && e.key === 'f' && !isMobile) {
+    if (!handleInput) {
+      return;
+    } else if (e.ctrlKey && e.key === 'f' && !isMobile) {
       e.preventDefault();
       isZoomed = !isZoomed;
     } else if (e.key === 'Tab') {
@@ -39,7 +42,12 @@
 
 <svelte:window bind:innerWidth={windowWidth} on:keydown={handleKeydown} />
 
-<Toolbar {sheets} {isMobile} bind:currentSheet bind:fullscreen={isZoomed} />
+<Toolbar
+  {sheets}
+  {isMobile}
+  on:settingsToggled
+  bind:currentSheet
+  bind:fullscreen={isZoomed} />
 
 <div class="flex flex-col">
   <ul role="list" class="flex-1 grid grid-cols-3 gap-0.5">

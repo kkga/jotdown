@@ -1,5 +1,6 @@
 <script lang="ts">
   import { tick, createEventDispatcher } from 'svelte';
+  import { settings } from '../stores';
   import type { SheetType } from '../types/sheet.type';
 
   const dispatch = createEventDispatcher();
@@ -11,7 +12,10 @@
   export let zoomed = false;
   export let isCurrent = false;
 
-  $: color = sheet.content.trim() === '' ? 'gray' : sheet['color'];
+  $: useColors = $settings.colorSet === 1;
+  $: color = sheet.content.trim() === '' ? 'unused' : useColors ? sheet['color'] : 'gray';
+  $: fontSize = ['s', 'm'][$settings.fontSize - 1];
+  $: font = $settings.font;
 
   let textEl: HTMLTextAreaElement;
 

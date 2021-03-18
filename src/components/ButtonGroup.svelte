@@ -1,4 +1,4 @@
-<div class="flex flex-row button-group">
+<div class="border border-gray-300 flex flex-row divide-x divide-gray-300 button-group">
   <slot />
 </div>
 

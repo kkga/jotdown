@@ -15,11 +15,13 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<Settings on:close={() => (settingsOpen = false)} show={true} />
-<Pad
-  handleInput={!settingsOpen}
-  bind:sheets={$sheets}
-  on:settingsToggled={() => (settingsOpen = !settingsOpen)} />
+<div class="h-full flex flex-col text-gray-500 bg-gray-50 dark:bg-gray-900">
+  <Settings on:close={() => (settingsOpen = false)} show={true} />
+  <Pad
+    handleInput={!settingsOpen}
+    bind:sheets={$sheets}
+    on:settingsToggled={() => (settingsOpen = !settingsOpen)} />
+</div>
 
 <style global lang="postcss">
   @tailwind base;
@@ -29,13 +31,6 @@
   body,
   html {
     height: 100%;
-  }
-
-  body {
-    @apply flex flex-col bg-gray-50;
-  }
-
-  body.dark {
-    @apply bg-gray-900;
+    background-color: black;
   }
 </style>

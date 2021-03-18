@@ -14,7 +14,7 @@
 
   $: useColors = $settings.colorSet === 1;
   $: color =
-    sheet.content.trim() === '' ? 'transparent' : useColors ? sheet['color'] : 'gray';
+    sheet.content.trim() === '' ? 'gray-200' : useColors ? sheet['color'] : 'gray';
   $: fontSize = ['sm', 'base'][$settings.fontSize - 1];
   $: font = $settings.font === 'cursive' ? 'cursive' : 'sans';
 
@@ -44,14 +44,14 @@
 
 <div
   class="flex-1 flex flex-col font-{font} text-{fontSize} bg-{color}-100 dark:bg-{color}-800">
-  <div class="bg-{color}-200 dark:bg-{color}-900">
-    <input
-      type="text"
-      bind:value={sheet.name}
-      on:input={(e) => onEditName(e.currentTarget.value)}
-      class="px-2 py-1 font-semibold leading-none uppercase border-b border-{color}-200 dark:border-{color}-700 text-{color}-700 dark:text-{color}-300 bg-transparent w-full"
-      class:text-center={zoomed} />
-  </div>
+  <input
+    type="text"
+    bind:value={sheet.name}
+    on:input={(e) => onEditName(e.currentTarget.value)}
+    class="z-10 px-2 py-2 font-semibold leading-none uppercase text-{color}-700 dark:text-{color}-200 bg-transparent w-full"
+    class:text-center={zoomed} />
+  <hr class="mx-2 my-0 border-{color}-200" />
+
   <textarea
     bind:this={textEl}
     use:focusOnInit
@@ -70,7 +70,7 @@
 <style>
   @keyframes fadeIn {
     from {
-      background-color: #ffffff22;
+      background-color: #ffffff99;
     }
     to {
       background-color: transparent;

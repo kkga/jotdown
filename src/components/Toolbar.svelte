@@ -19,8 +19,7 @@
   }
 </script>
 
-<div
-  class="flex text-sm justify-between items-center text-gray-500 bg-gray-50 dark:bg-gray-900">
+<div class="flex text-sm justify-between items-center">
   {#if isMobile}
     <button style="visibility: hidden" />
   {:else}
@@ -75,7 +74,7 @@
       {/each}
     </ul>
   {:else}
-    <div class="jotdown">Jotdown</div>
+    <div>Jotdown</div>
   {/if}
 
   <Button ghost on:click={() => dispatch('settingsToggled', {})}>

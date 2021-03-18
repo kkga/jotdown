@@ -55,7 +55,7 @@
       <li
         class="flex flex-col"
         class:hidden={isZoomed && currentSheet !== sheet.id}
-        class:col-span-full={isZoomed && currentSheet === sheet.id}>
+        class:zoomed={isZoomed && currentSheet === sheet.id}>
         <Sheet
           {sheet}
           zoomed={isZoomed}
@@ -66,3 +66,9 @@
     {/each}
   </ul>
 </div>
+
+<style lang="postcss">
+  .zoomed {
+    @apply col-span-full;
+  }
+</style>

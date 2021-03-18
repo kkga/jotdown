@@ -9,7 +9,7 @@ module.exports = {
 			]
 		}
 	},
-	darkMode: 'class', // or 'media' or 'class'
+	darkMode: 'media', // or 'media' or 'class'
 	theme: {
 		fontFamily: {
 			cursive: ['Recursive', 'sans-serif']
@@ -17,9 +17,7 @@ module.exports = {
 		extend: {}
 	},
 	variants: {
-		extend: {
-			backgroundColor: ['active']
-		}
+		extend: {}
 	},
 	plugins: []
 };

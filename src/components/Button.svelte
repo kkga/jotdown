@@ -7,7 +7,7 @@
 </script>
 
 <button
-  class="p-2 h-8 flex justify-center items-center text-{textColor}-500 dark:text-{textColor}-300 ring-inset 400 outline-none focus:ring-2 active:bg-{color}-200"
+  class="p-2 h-7 flex justify-center items-center text-{textColor}-500 dark:text-{textColor}-300 ring-inset 400 outline-none focus:ring-2 active:bg-{color}-200"
   {value}
   class:ghost
   class:active

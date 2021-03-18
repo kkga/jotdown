@@ -13,7 +13,7 @@
     on:click|self={() => dispatch('close')}>
     <div
       transition:fly={{ x: 8, duration: 125 }}
-      class="shadow z-50 absolute top-8 right-0 bottom-0 p-4 w-80 flex flex-col text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-700">
+      class="shadow z-50 absolute top-8 right-0 bottom-0 p-4 w-72 flex flex-col text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-700">
       <slot />
     </div>
   </div>

@@ -2,6 +2,7 @@
   import Sheet from './Sheet.svelte';
   import Toolbar from './Toolbar.svelte';
   import type { SheetType } from '../types/sheet.type';
+  import { tw } from 'twind';
 
   export let sheets: SheetType[] = [];
   export let handleInput = true;
@@ -49,13 +50,13 @@
   bind:currentSheet
   bind:fullscreen={isZoomed} />
 
-<div class="flex-1 flex flex-col">
-  <ul role="list" class="flex-1 grid grid-cols-3 gap-0.5">
+<div class={tw`flex(& 1 col)`}>
+  <ul role="list" class={tw`flex-1 grid grid-cols-3 gap-0.5`}>
     {#each sheets as sheet (sheet.id)}
       <li
-        class="flex flex-col"
-        class:hidden={isZoomed && currentSheet !== sheet.id}
-        class:zoomed={isZoomed && currentSheet === sheet.id}>
+        class={tw`flex(& col)
+          ${isZoomed && `col-span-full`}
+          ${isZoomed && currentSheet !== sheet.id && `hidden`}`}>
         <Sheet
           {sheet}
           zoomed={isZoomed}
@@ -66,9 +67,3 @@
     {/each}
   </ul>
 </div>
-
-<style lang="postcss">
-  .zoomed {
-    @apply col-span-full;
-  }
-</style>

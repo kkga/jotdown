@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { tw } from 'twind';
   import type { SheetType } from '../types/sheet.type';
   import Button from './Button.svelte';
 
@@ -19,9 +20,9 @@
   }
 </script>
 
-<div class="flex text-sm justify-between items-center">
+<div class={tw`flex text-sm justify-between items-center`}>
   {#if isMobile}
-    <button style="visibility: hidden" />
+    <div />
   {:else}
     <Button ghost on:click={() => (fullscreen = !fullscreen)}>
       {#if fullscreen}
@@ -41,7 +42,7 @@
   {/if}
 
   {#if fullscreen}
-    <ul class="flex flex-row">
+    <ul class={tw`flex(& row)`}>
       {#each sheets as sheet (sheet.id)}
         <!-- TODO use SheetButton component -->
         <Button

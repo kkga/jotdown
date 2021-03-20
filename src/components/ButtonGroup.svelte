@@ -1,12 +1,11 @@
-<div class="border border-gray-300 flex flex-row divide-x divide-gray-300 button-group">
+<script>
+  import { tw } from 'twind';
+</script>
+
+<div
+  class={tw`
+     border(& gray-300) flex(& row) divide(x gray-300)
+     dark:(border-gray-500 divide-gray-500)
+     `}>
   <slot />
 </div>
-
-<style lang="postcss">
-  :global(.button-group > button) {
-    @apply flex-1;
-  }
-  /* :global(.button-group > button:not(:first-child)) { */
-  /*   margin-left: -1px; */
-  /* } */
-</style>

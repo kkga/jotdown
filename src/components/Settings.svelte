@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { settings } from '../stores';
+  import { tw, apply } from 'twind';
   import Sidebar from './Sidebar.svelte';
   import Button from './Button.svelte';
   import ButtonGroup from './ButtonGroup.svelte';
@@ -34,40 +35,74 @@
   function handleFontSizeChange(fontSize: 1 | 2) {
     $settings.fontSize = fontSize;
   }
+
+  const headingStyle = apply`mt-8 mb-1 col-span-4 font-bold font-semibold uppercase text-xs tracking-wide`;
+  const kbdStyle = apply`
+    bg-gray-100 border border-gray-200 px-1 py-0 block
+    dark:(bg-gray-600 border-gray-500 text-gray-300)
+    `;
+  const groupContainerStyle = apply`grid grid-cols-4 gap-2 items-center`;
 </script>
 
 <Sidebar {show} on:close={onClose}>
-  <div class="flex flex-row items-center space-x-2">
+  <div class={tw`flex(& row) items-center space-x-2`}>
     <div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 40" width="48" height="40">
-        <rect x="0" y="0" width="15" height="19" class="fill-current text-blue-500" />
-        <rect x="16" y="0" width="15" height="19" class="fill-current text-green-500" />
-        <rect x="32" y="0" width="15" height="19" class="fill-current text-purple-500" />
-        <rect x="0" y="20" width="15" height="19" class="fill-current text-yellow-500" />
-        <rect x="16" y="20" width="15" height="19" class="fill-current text-red-500" />
-        <rect x="32" y="20" width="15" height="19" class="fill-current text-pink-500" />
+        <rect x="0" y="0" width="15" height="19" class={tw`fill-current text-blue-500`} />
+        <rect
+          x="16"
+          y="0"
+          width="15"
+          height="19"
+          class={tw`fill-current text-green-500`} />
+        <rect
+          x="32"
+          y="0"
+          width="15"
+          height="19"
+          class={tw`fill-current text-purple-500`} />
+        <rect
+          x="0"
+          y="20"
+          width="15"
+          height="19"
+          class={tw`fill-current text-yellow-500`} />
+        <rect
+          x="16"
+          y="20"
+          width="15"
+          height="19"
+          class={tw`fill-current text-red-500`} />
+        <rect
+          x="32"
+          y="20"
+          width="15"
+          height="19"
+          class={tw`fill-current text-pink-500`} />
       </svg>
     </div>
 
     <div>
-      <h2 class="font-bold text-gray-800">Jotdown</h2>
-      <p class="text-xs">Simple app for jotting things down.</p>
+      <h2 class={tw`font-bold`}>Jotdown</h2>
+      <p class={tw`text-xs`}>Simple app for jotting things down.</p>
     </div>
   </div>
 
-  <hr class="my-4" />
+  <hr class={tw`my-4`} />
 
-  <div class="grid grid-cols-4 gap-2 items-center">
-    <h3 class="my-1 col-span-4 font-bold">Appearance</h3>
+  <div class={tw(groupContainerStyle)}>
+    <h3 class={tw(headingStyle)}>Appearance</h3>
     <div>Theme</div>
-    <div class="col-span-3">
+    <div class={tw`col-span-3`}>
       <ButtonGroup>
         <Button
+          fill
           active={theme === 'auto'}
           value="auto"
           on:click={() => handleThemeChange('auto')}>
           Auto</Button>
         <Button
+          fill
           active={theme === 'light'}
           value="light"
           on:click={() => handleThemeChange('light')}>
@@ -82,6 +117,7 @@
               d="M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z" /></svg>
         </Button>
         <Button
+          fill
           active={theme === 'dark'}
           value="dark"
           on:click={() => handleThemeChange('dark')}>
@@ -99,9 +135,10 @@
     </div>
 
     <div>Colors</div>
-    <div class="col-span-3">
+    <div class={tw`col-span-3`}>
       <ButtonGroup>
         <Button
+          fill
           active={colorset === 1}
           on:click={() => handleColorsetChange(1)}
           value="1">
@@ -119,6 +156,7 @@
           </svg>
         </Button>
         <Button
+          fill
           active={colorset === 0}
           on:click={() => handleColorsetChange(0)}
           value="0">
@@ -139,49 +177,50 @@
     </div>
 
     <div>Font</div>
-    <div class="col-span-3">
+    <div class={tw`col-span-3`}>
       <ButtonGroup>
-        <Button on:click={() => handleFontChange('cursive')} active={font === 'cursive'}
-          ><span class="font-cursive">Recursive</span></Button>
-        <Button on:click={() => handleFontChange('system')} active={font === 'system'}
-          >System</Button>
+        <Button
+          fill
+          on:click={() => handleFontChange('cursive')}
+          active={font === 'cursive'}
+          ><span class={tw`font-cursive`}>Recursive</span></Button>
+        <Button
+          fill
+          on:click={() => handleFontChange('system')}
+          active={font === 'system'}>System</Button>
       </ButtonGroup>
     </div>
 
     <div>Text</div>
-    <div class="col-span-3">
+    <div class={tw`col-span-3`}>
       <ButtonGroup>
-        <Button on:click={() => handleFontSizeChange(1)} active={fontSize === 1}
+        <Button fill on:click={() => handleFontSizeChange(1)} active={fontSize === 1}
           >Small</Button>
-        <Button on:click={() => handleFontSizeChange(2)} active={fontSize === 2}
+        <Button fill on:click={() => handleFontSizeChange(2)} active={fontSize === 2}
           >Medium</Button>
       </ButtonGroup>
     </div>
   </div>
 
-  <hr class="my-4" />
-
-  <div class="grid grid-cols-4 gap-2 items-center">
-    <h3 class="my-1 col-span-4 font-bold">Keyboard shortcuts</h3>
+  <div class={tw(groupContainerStyle)}>
+    <h3 class={tw(headingStyle)}>Keyboard shortcuts</h3>
     <div>Cycle</div>
-    <div class="col-span-3 flex flex-row space-x-2">
-      <kbd>Tab</kbd> <kbd>Shift-Tab</kbd>
+    <div class={tw`col-span-3 flex flex-row space-x-2`}>
+      <kbd class={tw(kbdStyle)}>Tab</kbd> <kbd class={tw(kbdStyle)}>Shift-Tab</kbd>
     </div>
     <div>Zoom</div>
-    <div class="col-span-3 flex flex-row space-x-2">
-      <kbd>Ctrl-F</kbd>
+    <div class={tw`col-span-3 flex flex-row space-x-2`}>
+      <kbd class={tw(kbdStyle)}>Ctrl-F</kbd>
     </div>
   </div>
 
-  <hr class="my-4" />
-
-  <footer class="mt-auto border border-gray-200 divide-y text-xs">
-    <div class="p-2">
+  <footer class={tw`mt-auto divide-y dark:(divide-gray-600) space-y-2 text-xs`}>
+    <div>
       Made by <Link href="https://twitter.com/kkga_">@kkga</Link>. Source:
       <Link href="https://github.com/kkga/jotdown">on GitHub</Link>.
     </div>
 
-    <div class="p-2 flex flex-col space-y-1">
+    <div class={tw`flex flex-col space-y-1 pt-2`}>
       <div>
         Bugs? <Link href="https://github.com/kkga/jotdown/issues">Create an issue</Link>.
       </div>
@@ -193,13 +232,3 @@
     </div>
   </footer>
 </Sidebar>
-
-<style lang="postcss">
-  kbd {
-    @apply bg-gray-100 border border-gray-200 px-1 py-0 block;
-  }
-
-  h3 {
-    @apply font-semibold uppercase text-xs tracking-wide;
-  }
-</style>

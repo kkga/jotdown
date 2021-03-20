@@ -1,28 +1,28 @@
 <script lang="ts">
+  import { tw } from 'twind';
   export let value: any = null;
-  export let color = 'gray';
+  export let bgColor = 'gray';
   export let textColor = 'gray';
   export let active = false;
   export let ghost = false;
+  export let fill = false;
 </script>
 
 <button
-  class="p-2 h-7 flex justify-center items-center text-{textColor}-500 dark:text-{textColor}-300 ring-inset 400 outline-none focus:ring-2 active:bg-{color}-200"
+  class={tw`
+    p-2 h-7 flex justify-center items-center text-${textColor}-500 ring-inset outline-none 
+    dark:(text-${textColor}-300)
+    focus:(ring-2)
+    active:(bg-${bgColor}-200)
+    ${fill && `flex-1`}
+    ${
+      active &&
+      `text-gray-900 bg-gray-200
+      dark:(text-gray-100 bg-gray-800)`
+    }
+    ${ghost && `bg-transparent`}
+  `}
   {value}
-  class:ghost
-  class:active
   on:click>
   <slot>Button</slot>
 </button>
-
-<style lang="postcss">
-  /* button { */
-  /*   @apply border; */
-  /* } */
-  .active {
-    @apply text-gray-900 bg-gray-200;
-  }
-  .ghost {
-    @apply bg-transparent;
-  }
-</style>

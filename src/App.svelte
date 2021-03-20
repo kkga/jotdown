@@ -2,6 +2,18 @@
   import Pad from './components/Pad.svelte';
   import Settings from './components/Settings.svelte';
   import { sheets, settings } from './stores';
+  import { tw, setup } from 'twind';
+
+  setup({
+    darkMode: 'class',
+    theme: {
+      fontFamily: {
+        cursive: ['Recursive', 'sans-serif'],
+        system: ['-system-ui', 'sans-serif']
+      }
+    },
+    hash: false
+  });
 
   let settingsOpen = false;
   $: document.body.className = $settings.theme;
@@ -15,7 +27,7 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<div class="h-full flex flex-col text-gray-500 bg-gray-50 dark:bg-gray-900">
+<div class={tw`h-full flex flex-col text-gray-500 bg-gray-50 dark:bg-gray-900`}>
   <Settings on:close={() => (settingsOpen = false)} show={true} />
   <Pad
     handleInput={!settingsOpen}
@@ -23,13 +35,12 @@
     on:settingsToggled={() => (settingsOpen = !settingsOpen)} />
 </div>
 
-<style global lang="postcss">
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-
-  body,
-  html {
+<style>
+  :global(html) {
+    height: 100%;
+  }
+  :global(body) {
+    min-height: 100%;
     height: 100%;
     background-color: black;
   }

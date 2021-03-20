@@ -6,6 +6,7 @@
   import Button from './Button.svelte';
   import ButtonGroup from './ButtonGroup.svelte';
   import Link from './Link.svelte';
+  import Logo from './Logo.svelte';
   export let show = false;
 
   const dispatch = createEventDispatcher();
@@ -36,59 +37,22 @@
     $settings.fontSize = fontSize;
   }
 
-  const headingStyle = apply`mt-8 mb-1 col-span-4 font-bold font-semibold uppercase text-xs tracking-wide`;
+  const headingStyle = apply`mb-1 col-span-4 font-bold font-semibold uppercase text-xs tracking-wide`;
   const kbdStyle = apply`
-    bg-gray-100 border border-gray-200 px-1 py-0 block
-    dark:(bg-gray-600 border-gray-500 text-gray-300)
+    bg-gray-200 px-1 py-0 inline-block
+    dark:(bg-gray-700 text-gray-300)
     `;
-  const groupContainerStyle = apply`grid grid-cols-4 gap-2 items-center`;
+  const groupContainerStyle = apply`py-4 grid grid-cols-4 gap-2 items-center`;
 </script>
 
 <Sidebar {show} on:close={onClose}>
-  <div class={tw`flex(& row) items-center space-x-2`}>
-    <div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 40" width="48" height="40">
-        <rect x="0" y="0" width="15" height="19" class={tw`fill-current text-blue-500`} />
-        <rect
-          x="16"
-          y="0"
-          width="15"
-          height="19"
-          class={tw`fill-current text-green-500`} />
-        <rect
-          x="32"
-          y="0"
-          width="15"
-          height="19"
-          class={tw`fill-current text-purple-500`} />
-        <rect
-          x="0"
-          y="20"
-          width="15"
-          height="19"
-          class={tw`fill-current text-yellow-500`} />
-        <rect
-          x="16"
-          y="20"
-          width="15"
-          height="19"
-          class={tw`fill-current text-red-500`} />
-        <rect
-          x="32"
-          y="20"
-          width="15"
-          height="19"
-          class={tw`fill-current text-pink-500`} />
-      </svg>
-    </div>
-
-    <div>
-      <h2 class={tw`font-bold`}>Jotdown</h2>
-      <p class={tw`text-xs`}>Simple app for jotting things down.</p>
+  <div class={tw`flex(& row) pb-4 items-center space-x-2`}>
+    <Logo />
+    <div class={tw`space-y-1`}>
+      <h2 class={tw`font-bold leading-none`}>Jotdown</h2>
+      <p class={tw`text-xs leading-none`}>Simple app for jotting things down.</p>
     </div>
   </div>
-
-  <hr class={tw`my-4`} />
 
   <div class={tw(groupContainerStyle)}>
     <h3 class={tw(headingStyle)}>Appearance</h3>
@@ -214,21 +178,15 @@
     </div>
   </div>
 
-  <footer class={tw`mt-auto divide-y dark:(divide-gray-600) space-y-2 text-xs`}>
+  <footer class={tw`mt-auto pt-3 dark:(divide-gray-600) space-y-2 text-xs`}>
+    Made by <Link href="https://twitter.com/kkga_">@kkga</Link>. Source:
+    <Link href="https://github.com/kkga/jotdown">on GitHub</Link>.
     <div>
-      Made by <Link href="https://twitter.com/kkga_">@kkga</Link>. Source:
-      <Link href="https://github.com/kkga/jotdown">on GitHub</Link>.
-    </div>
-
-    <div class={tw`flex flex-col space-y-1 pt-2`}>
-      <div>
-        Bugs? <Link href="https://github.com/kkga/jotdown/issues">Create an issue</Link>.
-      </div>
-      <div>
-        Suggestions? <Link href="https://github.com/kkga/jotdown/discussions"
-          >Start a discussion</Link
-        >.
-      </div>
+      Bugs? <Link href="https://github.com/kkga/jotdown/issues">Create an issue</Link
+      >.<br />
+      Suggestions? <Link href="https://github.com/kkga/jotdown/discussions"
+        >Start a discussion</Link
+      >.
     </div>
   </footer>
 </Sidebar>

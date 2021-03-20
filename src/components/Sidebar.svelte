@@ -17,8 +17,9 @@
       transition:fly={{ x: 8, duration: 125 }}
       class={tw`
         z-50 shadow absolute top-8 right-0 bottom-0 p-4 w-72 flex(& col)
-        bg(gray-50) text(sm gray-500)
-        dark:(text(gray-400) bg(gray-800))`}>
+        divide-y divide-gray-300
+        bg(gray-50) text(sm gray-600)
+        dark:(divide-gray-600 text(gray-300) bg(gray-800))`}>
       <slot />
     </div>
   </div>

@@ -10,15 +10,15 @@
 
 <button
   class={tw`
-    p-2 h-7 flex justify-center items-center text-${textColor}-500 ring-inset outline-none 
+    p-2 h-7 flex justify-center items-center text-${textColor}-600 ring-inset outline-none 
     dark:(text-${textColor}-300)
     focus:(ring-2)
-    active:(bg-${bgColor}-200)
+    active:(bg-${bgColor}-200 dark:(bg-gray-900))
     ${fill && `flex-1`}
     ${
       active &&
       `text-gray-900 bg-gray-200
-      dark:(text-gray-100 bg-gray-800)`
+      dark:(text-gray-200 bg-gray-900)`
     }
     ${ghost && `bg-transparent`}
   `}

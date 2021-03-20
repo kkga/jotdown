@@ -9,7 +9,7 @@
     theme: {
       fontFamily: {
         cursive: ['Recursive', 'sans-serif'],
-        system: ['-system-ui', 'sans-serif']
+        system: ['-apple-system', 'system-ui', 'sans-serif']
       }
     },
     hash: false

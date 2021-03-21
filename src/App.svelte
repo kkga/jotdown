@@ -1,47 +1,48 @@
 <script lang="ts">
-  import Pad from './components/Pad.svelte';
-  import Settings from './components/Settings.svelte';
-  import { sheets, settings } from './stores';
-  import { tw, setup } from 'twind';
+import Pad from './components/Pad.svelte';
+import Settings from './components/Settings.svelte';
+import { sheets, settings } from './stores';
+import { tw, setup } from 'twind';
 
-  setup({
+setup({
     darkMode: 'class',
     theme: {
-      fontFamily: {
-        cursive: ['Recursive', 'sans-serif'],
-        system: ['-apple-system', 'system-ui', 'sans-serif']
-      }
+        fontFamily: {
+            cursive: ['Recursive', 'sans-serif'],
+            system: ['-apple-system', 'system-ui', 'sans-serif']
+        }
     },
     hash: false
-  });
+});
 
-  let settingsOpen = false;
-  $: document.body.className = $settings.theme;
+let settingsOpen = false;
+$: document.body.className = $settings.theme;
 
-  function handleKeydown(e: KeyboardEvent) {
+function handleKeydown(e: KeyboardEvent) {
     if (settingsOpen && e.key == 'Escape') {
-      settingsOpen = false;
+        settingsOpen = false;
     }
-  }
+}
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
 
 <div class={tw`h-full flex flex-col text-gray-500 bg-gray-50 dark:bg-gray-900`}>
-  <Settings on:close={() => (settingsOpen = false)} show={true} />
-  <Pad
-    handleInput={!settingsOpen}
-    bind:sheets={$sheets}
-    on:settingsToggled={() => (settingsOpen = !settingsOpen)} />
+    <Settings on:close={() => (settingsOpen = false)} show={true} />
+    <Pad
+        handleInput={!settingsOpen}
+        bind:sheets={$sheets}
+        on:settingsToggled={() => (settingsOpen = !settingsOpen)}
+    />
 </div>
 
 <style>
-  :global(html) {
+:global(html) {
     height: 100%;
-  }
-  :global(body) {
+}
+:global(body) {
     min-height: 100%;
     height: 100%;
     background-color: black;
-  }
+}
 </style>

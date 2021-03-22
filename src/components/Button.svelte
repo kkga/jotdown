@@ -10,7 +10,7 @@ export let fill = false;
 
 <button
     class={tw`
-    p-2 h-7 flex justify-center items-center text-${textColor}-600 ring-inset outline-none 
+    p-2 h-8 flex justify-center items-center text-${textColor}-600 ring-inset outline-none 
     dark:(text-${textColor}-300)
     focus:(ring-2)
     active:(bg-${bgColor}-200 dark:(bg-gray-900))
@@ -19,7 +19,6 @@ export let fill = false;
     ${ghost && `bg-transparent`}
     `}
     {value}
-    on:click
->
+    on:click>
     <slot>Button</slot>
 </button>

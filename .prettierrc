@@ -2,7 +2,7 @@
   "pluginSearchDirs": ['.'],
   "svelteSortOrder" : "options-scripts-markup-styles",
   "svelteStrictMode": false,
-  "svelteBracketNewLine": true,
+  "svelteBracketNewLine": false,
   "svelteAllowShorthand": true,
   "svelteIndentScriptAndStyle": false,
   "trailingComma": 'none',

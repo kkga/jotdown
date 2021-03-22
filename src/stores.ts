@@ -14,7 +14,8 @@ const initialSheets: SheetType[] = [
 		id: 2,
 		name: 'keyboard navigation',
 		color: 'green',
-		content: '- Tab/Shift-Tab -- switch between sheets \n- Ctrl-F -- toggle zoom'
+		content:
+			'- Tab/Shift-Tab -- switch between sheets \n- Ctrl-F -- toggle zoom'
 	},
 	{
 		id: 3,

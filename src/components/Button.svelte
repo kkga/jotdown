@@ -9,7 +9,7 @@ export let fill = false;
 </script>
 
 <button
-    class={tw`
+  class={tw`
     p-2 h-8 flex justify-center items-center text-${textColor}-600 ring-inset outline-none 
     dark:(text-${textColor}-300)
     focus:(ring-2)
@@ -18,7 +18,7 @@ export let fill = false;
     ${active && `text-gray-900 bg-gray-200 dark:(text-gray-200 bg-gray-900)`}
     ${ghost && `bg-transparent`}
     `}
-    {value}
-    on:click>
-    <slot>Button</slot>
+  {value}
+  on:click>
+  <slot>Button</slot>
 </button>

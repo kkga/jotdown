@@ -1,5 +1,5 @@
 <script lang="ts">
-import { tw } from 'twind';
+import { tw, animation } from 'twind/css';
 import { tick, createEventDispatcher } from 'svelte';
 import { settings } from '../stores';
 import type { SheetType } from '../types/sheet.type';
@@ -13,9 +13,9 @@ export let sheet: SheetType;
 export let zoomed = false;
 export let isCurrent = false;
 
+$: isEmpty = sheet.content.trim() === '';
 $: useColors = $settings.colorSet === 1;
-$: color =
-  sheet.content.trim() === '' ? 'gray' : useColors ? sheet['color'] : 'gray';
+$: color = isEmpty ? 'gray' : useColors ? sheet['color'] : 'gray';
 $: fontSize = ['sm', 'base'][$settings.fontSize - 1];
 $: font = $settings.font === 'cursive' ? 'cursive' : 'system';
 
@@ -41,6 +41,16 @@ async function focusTextArea() {
 }
 
 $: if (isCurrent) focusTextArea();
+
+const flashLight = animation('0.35s', {
+  from: { backgroundColor: '#ffffff99' },
+  to: { backgroundColor: 'transparent' }
+});
+
+const flashDark = animation('0.35s', {
+  from: { backgroundColor: '#ffffff33' },
+  to: { backgroundColor: 'transparent' }
+});
 </script>
 
 <div
@@ -49,37 +59,29 @@ $: if (isCurrent) focusTextArea();
     type="text"
     bind:value={sheet.name}
     on:input={(e) => onEditName(e.currentTarget.value)}
-    class={tw`z-10 px-2 py-2 outline-none font-semibold leading-none uppercase text-${color}-700
-            dark:(text-${color}-200) bg-transparent w-full
-        ${zoomed && `text-center`} 
-        `} />
+    class={tw`z-10 px-2 py-2 outline-none font-semibold leading-none uppercase bg-transparent w-full
+      ${
+        isEmpty
+          ? `text-${color}-400 dark:(text-${color}-500)`
+          : `text-${color}-700 dark:(text-${color}-200)`
+      }
+      ${zoomed && `text-center`} 
+    `} />
 
   <hr class={tw`mx-2 my-0 border-${color}-200 dark:(border-${color}-700)`} />
 
   <textarea
     bind:this={textEl}
-    use:focusOnInit
     id="sheet-{sheet.id}"
     on:focus={() => dispatch('focus', sheet.id)}
     on:input={(e) => onEditContent(e.currentTarget.value)}
     tabindex={sheet.id}
     class:flash={!zoomed}
-    class={tw`${
-      zoomed && `max-w-4xl text-xl p-8`
-    } p-2 w-full m-auto flex-1 outline-none text-${color}-700 dark:text-${color}-200 bg-transparent resize-none`}
-    spellcheck="false">{sheet.content}</textarea>
+    class={tw`
+      p-2 w-full m-auto flex-1 outline-none text-${color}-700 bg-transparent resize-none
+      ${zoomed && `max-w-4xl text-xl p-8`}
+      focus:${!zoomed && flashLight}
+      dark:(focus:${!zoomed && flashDark})
+      dark:text-${color}-200 
+    `}>{sheet.content}</textarea>
 </div>
-
-<style>
-@keyframes fadeIn {
-  from {
-    background-color: #ffffff99;
-  }
-  to {
-    background-color: transparent;
-  }
-}
-.flash:focus {
-  animation: 0.35s fadeIn;
-}
-</style>

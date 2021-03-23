@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { tw } from 'twind';
-  export let href = '';
+import { tw } from 'twind';
+export let href = '';
 </script>
 
 <a {href} class={tw`underline`}>

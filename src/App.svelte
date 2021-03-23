@@ -18,7 +18,7 @@ function handleKeydown(e: KeyboardEvent) {
 
 <div
   class={tw`h-full flex flex-col text-gray-500 bg-gray-50
-    dark:(text-gray-400 bg-gray-900)`}>
+            dark:(text-gray-400 bg-gray-900)`}>
   <Settings on:close={() => (settingsOpen = false)} show={true} />
   <Pad
     handleInput={!settingsOpen}

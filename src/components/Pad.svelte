@@ -2,8 +2,10 @@
   import Sheet from './Sheet.svelte';
   import Toolbar from './Toolbar.svelte';
   import type { SheetType } from '../types/sheet.type';
+  import { tw } from 'twind';
 
   export let sheets: SheetType[] = [];
+  export let handleInput = true;
 
   const mobileMaxWidth = 576;
 
@@ -21,7 +23,9 @@
   }
 
   function handleKeydown(e: KeyboardEvent) {
-    if (e.ctrlKey && e.key === 'f' && !isMobile) {
+    if (!handleInput) {
+      return;
+    } else if (e.ctrlKey && e.key === 'f' && !isMobile) {
       e.preventDefault();
       isZoomed = !isZoomed;
     } else if (e.key === 'Tab') {
@@ -39,15 +43,20 @@
 
 <svelte:window bind:innerWidth={windowWidth} on:keydown={handleKeydown} />
 
-<Toolbar {sheets} {isMobile} bind:currentSheet bind:fullscreen={isZoomed} />
+<Toolbar
+  {sheets}
+  {isMobile}
+  on:settingsToggled
+  bind:currentSheet
+  bind:fullscreen={isZoomed} />
 
-<div class="container">
-  <ul role="list" class="pad" class:zoomed={isZoomed}>
+<div class={tw`flex(& 1 col)`}>
+  <ul role="list" class={tw`flex-1 grid grid-cols-3 gap-0.5`}>
     {#each sheets as sheet (sheet.id)}
       <li
-        class="pad-item"
-        class:current={currentSheet === sheet.id}
-        class:zoomed={isZoomed}>
+        class={tw`flex(& col)
+          ${isZoomed && `col-span-full`}
+          ${isZoomed && currentSheet !== sheet.id && `hidden`}`}>
         <Sheet
           {sheet}
           zoomed={isZoomed}
@@ -58,41 +67,3 @@
     {/each}
   </ul>
 </div>
-
-<style>
-  .container {
-    grid-area: pad;
-    display: flex;
-    flex-direction: column;
-  }
-  .pad {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 2px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-  .pad.zoomed {
-    grid-template-columns: 1fr;
-  }
-  .pad-item {
-    display: flex;
-    flex-flow: column nowrap;
-  }
-  .pad-item.current.zoomed {
-    grid-row: 1/-1;
-    grid-column: 1/-1;
-  }
-
-  .pad.zoomed .pad-item:not(.current) {
-    display: none;
-  }
-
-  @media (min-width: 992px) {
-    .pad:not(.zoomed) {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-  }
-</style>

@@ -46,14 +46,16 @@
   --label-text: var(--{color}-100);
   --outline-color: var(--{color}-300);
   --selection-bg: var(--{color}-100);
-  --selection-text: var(--{color}-900)">
+  --selection-text: var(--{color}-900)"
+>
   <div class="label-container">
     <input
       type="text"
       bind:value={sheet.name}
       on:input={(e) => onEditName(e.currentTarget.value)}
       class="label-input"
-      class:zoomed />
+      class:zoomed
+    />
   </div>
   <textarea
     bind:this={textEl}
@@ -64,7 +66,8 @@
     tabindex={sheet.id}
     class="sheet-text"
     class:zoomed
-    spellcheck="false">{sheet.content}</textarea>
+    spellcheck="false">{sheet.content}</textarea
+  >
 </div>
 
 <style>

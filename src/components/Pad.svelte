@@ -47,13 +47,15 @@
       <li
         class="pad-item"
         class:current={currentSheet === sheet.id}
-        class:zoomed={isZoomed}>
+        class:zoomed={isZoomed}
+      >
         <Sheet
           {sheet}
           zoomed={isZoomed}
           isCurrent={currentSheet === sheet.id}
           on:focus={(e) => (currentSheet = e.detail)}
-          on:update={(e) => updateSheet(e.detail)} />
+          on:update={(e) => updateSheet(e.detail)}
+        />
       </li>
     {/each}
   </ul>
